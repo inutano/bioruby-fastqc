@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "bio-fastqc"
   gem.homepage = "http://github.com/inutano/bioruby-fastqc"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = "ruby parser for FastQC output"
+  gem.description = "ruby parser for FastQC, a quality control software for high-throughput sequencing data."
   gem.email = "inutano@gmail.com"
   gem.authors = ["Tazro Inutano Ohta"]
   # dependencies defined in Gemfile
