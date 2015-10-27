@@ -8,6 +8,5 @@
 #
 # In this file only require other files. Avoid other source code.
 
-require 'bio-fastqc/fastqc.rb'
-require 'bio-fastqc/cli.rb'
-
+require 'bio/fastqc/cli'
+require 'bio/fastqc'
