@@ -124,7 +124,7 @@ module Bio
 	    end
 
 	    ## Custom module: overall N content
-	    def total_n_content
+	    def overall_n_content
 	      per_base = self.per_base_n_content
 	      v = per_base.map{|c| c[1].to_f }
 	      v.reduce(:+) / v.size
@@ -200,7 +200,8 @@ module Bio
 	    end
 
 	    def summary
-	      { filename: self.filename,
+	      {
+          filename: self.filename,
 	        file_type: self.file_type,
 	        encoding: self.encoding,
 	        total_sequences: self.total_sequences,
@@ -212,20 +213,19 @@ module Bio
 	        per_sequnce_quality_scores: self.per_sequence_quality_scores,
 	        per_base_sequence_content: self.per_base_sequence_content,
 	        per_sequence_gc_content: self.per_sequence_gc_content,
-	        per_sequence_gc_content: self.per_sequence_gc_content,
 	        per_base_n_content: self.per_base_n_content,
 	        sequence_length_distribution: self.sequence_length_distribution,
-	        sequence_duplication_levels: self.sequence_duplication_levels,
+	        total_duplicate_percentage: self.total_duplicate_percentage,	        sequence_duplication_levels: self.sequence_duplication_levels,
 	        overrepresented_sequences: self.overrepresented_sequences,
 	        kmer_content: self.kmer_content,
 	        min_length: self.min_length,
 	        max_length: self.max_length,
-	        total_mean_sequence_qual: self.total_mean_sequence_qual,
-	        normalized_phred_score: self.normalized_phred_score,
-	        total_n_content: self.total_n_content,
+	        overall_mean_quality_score: self.overall_mean_quality_score,
+	        overall_median_quality_score: self.overall_median_quality_score,
+	        overall_n_content: self.overall_n_content,
 	        mean_sequence_length: self.mean_sequence_length,
 	        median_sequence_length: self.median_sequence_length,
-	        total_duplicate_percentage: self.total_duplicate_percentage }
+        }
 	    end
 	  end
 	end
