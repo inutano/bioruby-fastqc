@@ -8,6 +8,7 @@
 #
 # In this file only require other files. Avoid other source code.
 
+require 'bio/fastqc/file'
 require 'bio/fastqc/cli'
 require 'bio/fastqc/parser'
 require 'bio/fastqc'
