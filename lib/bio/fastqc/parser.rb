@@ -23,7 +23,7 @@ module Bio
 	    end
 
 	    def basic_statistics
-	      Hash[*@obj.select{|a| a.first.first == ">>Basic Statistics" }.flatten]
+	      Hash[*@object.select{|a| a.first.first == ">>Basic Statistics" }.flatten]
 	    end
 
 	    def filename
@@ -73,7 +73,7 @@ module Bio
 	    end
 
 	    def per_base_sequence_quality
-	      node = @obj.select{|a| a.first.first == ">>Per base sequence quality" }
+	      node = @object.select{|a| a.first.first == ">>Per base sequence quality" }
 	      node.first.select{|n| n.first != ">>Per base sequence quality" }
 	    end
 
@@ -92,27 +92,27 @@ module Bio
 	    end
 
 	    def per_sequence_quality_scores
-	      node = @obj.select{|a| a.first.first == ">>Per sequence quality scores" }
+	      node = @object.select{|a| a.first.first == ">>Per sequence quality scores" }
 	      node.first.select{|n| n.first != ">>Per sequence quality scores" }
 	    end
 
 	    def per_base_sequence_content
-	      node = @obj.select{|a| a.first.first == ">>Per base sequence content" }
+	      node = @object.select{|a| a.first.first == ">>Per base sequence content" }
 	      node.first.select{|n| n.first != ">>Per base sequence content" }
 	    end
 
 	    def per_base_gc_content
-	      node = @obj.select{|a| a.first.first == ">>Per base GC content" }
+	      node = @object.select{|a| a.first.first == ">>Per base GC content" }
 	      node.first.select{|n| n.first != ">>Per base GC content" }
 	    end
 
 	    def per_sequence_gc_content
-	      node = @obj.select{|a| a.first.first == ">>Per sequence GC content" }
+	      node = @object.select{|a| a.first.first == ">>Per sequence GC content" }
 	      node.first.select{|n| n.first != ">>Per sequence GC content" }
 	    end
 
 	    def per_base_n_content
-	      node = @obj.select{|a| a.first.first == ">>Per base N content" }
+	      node = @object.select{|a| a.first.first == ">>Per base N content" }
 	      node.first.select{|n| n.first != ">>Per base N content" }
 	    end
 
@@ -124,7 +124,7 @@ module Bio
 	    end
 
 	    def sequence_length_distribution
-	      node = @obj.select{|a| a.first.first == ">>Sequence Length Distribution" }
+	      node = @object.select{|a| a.first.first == ">>Sequence Length Distribution" }
 	      node.first.select{|n| n.first != ">>Sequence Length Distribution" }
 	    end
 
@@ -173,22 +173,22 @@ module Bio
 	    end
 
 	    def sequence_duplication_levels
-	      node = @obj.select{|a| a.first.first == ">>Sequence Duplication Levels" }
+	      node = @object.select{|a| a.first.first == ">>Sequence Duplication Levels" }
 	      node.first.select{|n| n.first != ">>Sequence Duplication Levels" && n.first != "\#Total Duplicate Percentage" }
 	    end
 
 	    def total_duplicate_percentage
-	      node = @obj.select{|a| a.first.first == ">>Sequence Duplication Levels" }
+	      node = @object.select{|a| a.first.first == ">>Sequence Duplication Levels" }
 	      node.first.select{|n| n.first == "\#Total Duplicate Percentage" }.flatten[1].to_f
 	    end
 
 	    def overrepresented_sequences
-	      node = @obj.select{|a| a.first.first == ">>Overrepresented sequences" }
+	      node = @object.select{|a| a.first.first == ">>Overrepresented sequences" }
 	      node.first.select{|n| n.first != ">>Overrepresented sequences" }
 	    end
 
 	    def kmer_content
-	      node = @obj.select{|a| a.first.first == ">>Kmer Content" }
+	      node = @object.select{|a| a.first.first == ">>Kmer Content" }
 	      node.first.select{|n| n.first != ">>Kmer Content" }
 	    end
 
