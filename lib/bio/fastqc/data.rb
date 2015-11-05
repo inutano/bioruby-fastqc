@@ -4,7 +4,7 @@ require 'zip'
 
 module Bio
   module FastQC
-	  class File
+	  class Data
 			class << self
 				def read(file)
 					read_zipfile(file)
