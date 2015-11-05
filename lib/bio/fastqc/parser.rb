@@ -91,6 +91,11 @@ module Bio
 	      v.reduce(:+) / v.size
 	    end
 
+      def per_tile_sequence_quality
+        node = @object.select{|a| a.first.first == ">>Per tile sequence quality" }
+        node.first.select{|n| n.first != ">>Per tile sequence quality" }
+      end
+
 	    def per_sequence_quality_scores
 	      node = @object.select{|a| a.first.first == ">>Per sequence quality scores" }
 	      node.first.select{|n| n.first != ">>Per sequence quality scores" }
