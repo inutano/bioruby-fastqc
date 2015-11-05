@@ -77,14 +77,15 @@ module Bio
 	      node.first.select{|n| n.first != ">>Per base sequence quality" }
 	    end
 
-	    ## Original stat: base call quality indicator for each input file
-	    def total_mean_sequence_qual
+	    ## Custom module: overall mean base call quality indicator
+	    def overall_mean_quality_score
 	      per_base = self.per_base_sequence_quality
 	      v = per_base.map{|c| c[1].to_f }
 	      v.reduce(:+) / v.size
 	    end
 
-	    def normalized_phred_score
+      ## Custom module: overall median base call quality indicator
+	    def overall_median_quality_score
 	      per_base = self.per_base_sequence_quality
 	      v = per_base.map{|c| c[2].to_f } # median phred score
 	      v.reduce(:+) / v.size
@@ -115,7 +116,7 @@ module Bio
 	      node.first.select{|n| n.first != ">>Per base N content" }
 	    end
 
-	    ## Original stat: Summary of N content
+	    ## Custom module: overall N content
 	    def total_n_content
 	      per_base = self.per_base_n_content
 	      v = per_base.map{|c| c[1].to_f }
@@ -127,7 +128,7 @@ module Bio
 	      node.first.select{|n| n.first != ">>Sequence Length Distribution" }
 	    end
 
-	    ## Original stat: mean sequence length calculated from distribution
+	    ## Custom module: mean sequence length calculated from distribution
 	    def mean_sequence_length
 	      distribution = self.sequence_length_distribution
 	      sum = distribution.map do |length_count|
@@ -145,7 +146,7 @@ module Bio
 	      sum.reduce(:+) / self.total_sequences
 	    end
 
-	    ## Original stat: median sequence length calculated from distribution
+	    ## Custom module: median sequence length calculated from distribution
 	    def median_sequence_length
 	      distribution = self.sequence_length_distribution
 	      array = distribution.map do |length_count|
@@ -176,7 +177,6 @@ module Bio
 	      node.first.select{|n| n.first != ">>Sequence Duplication Levels" && n.first != "\#Total Duplicate Percentage" }
 	    end
 
-	    ## Original stat: summary of duplicate percentage for each input
 	    def total_duplicate_percentage
 	      node = @obj.select{|a| a.first.first == ">>Sequence Duplication Levels" }
 	      node.first.select{|n| n.first == "\#Total Duplicate Percentage" }.flatten[1].to_f
@@ -187,12 +187,12 @@ module Bio
 	      node.first.select{|n| n.first != ">>Overrepresented sequences" }
 	    end
 
-	    def  kmer_content
+	    def kmer_content
 	      node = @obj.select{|a| a.first.first == ">>Kmer Content" }
 	      node.first.select{|n| n.first != ">>Kmer Content" }
 	    end
 
-	    def all
+	    def summary
 	      { filename: self.filename,
 	        file_type: self.file_type,
 	        encoding: self.encoding,
