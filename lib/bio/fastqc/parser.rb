@@ -101,9 +101,9 @@ module Bio
 	      node.first.select{|n| n.first != ">>Per base sequence content" }
 	    end
 
-	    def per_base_gc_content
-	      node = @object.select{|a| a.first.first == ">>Per base GC content" }
-	      node.first.select{|n| n.first != ">>Per base GC content" }
+	    def per_sequence_gc_content
+	      node = @object.select{|a| a.first.first == ">>Per sequence GC content" }
+	      node.first.select{|n| n.first != ">>Per sequence GC content" }
 	    end
 
 	    def per_sequence_gc_content
