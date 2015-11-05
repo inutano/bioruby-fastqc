@@ -94,6 +94,8 @@ module Bio
       def per_tile_sequence_quality
         node = @object.select{|a| a.first.first == ">>Per tile sequence quality" }
         node.first.select{|n| n.first != ">>Per tile sequence quality" }
+      rescue
+        []
       end
 
 	    def per_sequence_quality_scores
@@ -206,9 +208,10 @@ module Bio
 	        sequence_length: self.sequence_length,
 	        percent_gc: self.percent_gc,
 	        per_base_sequence_quality: self.per_base_sequence_quality,
+          per_tile_sequence_quality: self.per_tile_sequence_quality,
 	        per_sequnce_quality_scores: self.per_sequence_quality_scores,
 	        per_base_sequence_content: self.per_base_sequence_content,
-	        per_base_gc_content: self.per_base_gc_content,
+	        per_sequence_gc_content: self.per_sequence_gc_content,
 	        per_sequence_gc_content: self.per_sequence_gc_content,
 	        per_base_n_content: self.per_base_n_content,
 	        sequence_length_distribution: self.sequence_length_distribution,
