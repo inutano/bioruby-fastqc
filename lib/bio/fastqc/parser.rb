@@ -80,15 +80,15 @@ module Bio
 	    ## Custom module: overall mean base call quality indicator
 	    def overall_mean_quality_score
 	      per_base = self.per_base_sequence_quality
-	      v = per_base.map{|c| c[1].to_f }
-	      v.reduce(:+) / v.size
+	      v = per_base.map{|c| (10**(c[1].to_f/-10)).to_f }
+	      -10 * Math.log10(v.reduce(:+) / v.size)
 	    end
 
       ## Custom module: overall median base call quality indicator
 	    def overall_median_quality_score
 	      per_base = self.per_base_sequence_quality
-	      v = per_base.map{|c| c[2].to_f } # median phred score
-	      v.reduce(:+) / v.size
+        v = per_base.map{|c| (10**(c[2].to_f/-10)).to_f }
+	      -10 * Math.log10(v.reduce(:+) / v.size)
 	    end
 
       def per_tile_sequence_quality
