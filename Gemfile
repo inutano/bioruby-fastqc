@@ -15,6 +15,6 @@ group :development do
   gem 'jeweler', '~> 2.0'
   gem 'bundler', '~> 1.0'
   gem 'bio', '~> 1.4'
-  gem 'bio-fastqc', '~> 0.0'
+  gem 'bio-fastqc'
   gem 'pry', '~> 0.10'
 end
