@@ -3,16 +3,21 @@ source "http://rubygems.org"
 # Example:
 #   gem "activesupport", ">= 2.3.5"
 
-gem 'rubyzip', ">= 1.1.0"
-gem 'thor', ">= 0.19.1"
+gem 'rubyzip', '~> 1.1', '>= 1.1.0'
+gem 'thor', "~> 0.19.1"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
 group :development do
-  gem "shoulda", ">= 0"
-  gem "rdoc", "~> 3.12"
-  gem "simplecov", ">= 0"
-  gem "jeweler"
-  gem "bundler", ">= 1.0.21"
-  gem "bio", ">= 1.4.2"
+  gem 'bundler', '~> 1.10'
+  gem 'rake', '~> 10.0'
+  gem 'rspec', '~> 3.3'
+  gem 'jeweler', '~> 2.0'
+  gem 'rdoc', '~> 3.12'
+
+  gem 'shoulda', '~> 3.5'
+  gem 'simplecov', '~> 0.10'
+
+  gem 'pry', '~> 0.10'
+  gem 'bio-fastqc'
 end
