@@ -2,7 +2,11 @@
 
 [![Build Status](https://secure.travis-ci.org/inutano/bioruby-fastqc.png)](http://travis-ci.org/inutano/bioruby-fastqc)
 
-A ruby parser for [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) data.
+A ruby parser for [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) data. 
+
+## Reqruirements
+
+Ruby 2.0 or later
 
 ## Installation
 
