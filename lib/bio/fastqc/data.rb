@@ -9,11 +9,9 @@ module Bio
 				def read(file)
 					read_zipfile(file)
 				rescue Zip::Error
-					if File.file?(file)
-  					read_flatfile(file)
-					else
-						read_dir(file)
-					end
+					read_flatfile(file)
+        rescue Errno::EISDIR
+          read_dir(file)
 				end
 
 				def read_zipfile(file)
