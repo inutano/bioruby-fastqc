@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 
 require 'thor'
+require 'json'
 
 module Bio
   module FastQC
     class CLI < Thor
-      desc "parse fastqc result", "parse fastqc_data.txt in DIR or ZIPFILE from fastqc command."
+      desc "parse [filename]", "parse fastqc data in fastqc directory or zipfile"
       def parse(file)
-        puts "parsed :D"
+        puts JSON.dump(Parser.new(Data.read(file)).summary)
       end
     end
   end
