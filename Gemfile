@@ -11,13 +11,13 @@ gem 'thor', "~> 0.19.1"
 group :development do
   gem 'bundler', '~> 1.10'
   gem 'rake', '~> 10.0'
-  gem 'rspec'
+  gem 'rspec', '~> 3.3'
   gem 'jeweler', '~> 2.0'
   gem 'rdoc', '~> 3.12'
 
   gem 'shoulda', '~> 3.5'
   gem 'simplecov', '~> 0.10'
 
-  gem 'bio-fastqc'
   gem 'pry', '~> 0.10'
+  gem 'bio-fastqc'
 end
