@@ -9,12 +9,15 @@ gem 'thor', "~> 0.19.1"
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
 group :development do
-  gem 'shoulda', '~> 3.5'
-  gem 'rdoc', '~> 3.12'
-  gem 'simplecov', '~> 0.10'
+  gem 'bundler', '~> 1.10'
+  gem 'rake', '~> 10.0'
+  gem 'rspec'
   gem 'jeweler', '~> 2.0'
-  gem 'bundler', '~> 1.0'
-  gem 'bio', '~> 1.4'
+  gem 'rdoc', '~> 3.12'
+
+  gem 'shoulda', '~> 3.5'
+  gem 'simplecov', '~> 0.10'
+
   gem 'bio-fastqc'
   gem 'pry', '~> 0.10'
 end

@@ -2,6 +2,11 @@
 
 require 'rubygems'
 require 'bundler'
+require 'rake'
+require 'jeweler'
+require 'rspec/core/rake_task'
+require 'rdoc/task'
+
 begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e
@@ -9,9 +14,7 @@ rescue Bundler::BundlerError => e
   $stderr.puts "Run `bundle install` to install missing gems"
   exit e.status_code
 end
-require 'rake'
 
-require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
   gem.name = "bio-fastqc"
@@ -25,12 +28,8 @@ Jeweler::Tasks.new do |gem|
 end
 Jeweler::RubygemsDotOrgTasks.new
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-end
+RSpec::Core::RakeTask.new(:spec)
+task :default => :spec
 
 desc "Code coverage detail"
 task :simplecov do
@@ -38,9 +37,6 @@ task :simplecov do
   Rake::Task['test'].execute
 end
 
-task :default => :test
-
-require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
