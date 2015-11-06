@@ -9,7 +9,7 @@ gem 'thor', "~> 0.19.1"
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
 group :development do
-  gem 'bundler', '~> 1.10'
+  gem 'bundler', '>= 1.8.0'
   gem 'rake', '~> 10.0'
   gem 'rspec', '~> 3.3'
   gem 'jeweler', '~> 2.0'
