@@ -6,3 +6,9 @@ class Array
 		map {|element| element.depth + 1 }.max
 	end
 end
+
+class Object
+  def depth
+    0
+  end
+end
