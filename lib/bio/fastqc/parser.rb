@@ -167,9 +167,9 @@ module Bio
             f = length.sub(/-\d+$/,"").to_i
             b = length.sub(/^\d+-/,"").to_i
             mean = (f + b) / 2
-            [mean] * count
+            [mean.to_f] * count
           else
-            [length.to_i] * count
+            [length.to_f] * count
           end
         end
         sorted = array.flatten.sort
