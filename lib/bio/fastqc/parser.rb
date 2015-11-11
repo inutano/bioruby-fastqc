@@ -22,6 +22,10 @@ module Bio
         end
       end
 
+      def fastqc_version
+        @data.split("\n").first.split("\t").last
+      end
+
       def basic_statistics
         Hash[*@object.select{|a| a.first.first == ">>Basic Statistics" }.flatten]
       end
@@ -201,6 +205,7 @@ module Bio
 
       def summary
         {
+          fastqc_version: self.fastqc_version,
           filename: self.filename,
           file_type: self.file_type,
           encoding: self.encoding,
