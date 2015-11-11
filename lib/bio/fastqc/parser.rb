@@ -198,6 +198,11 @@ module Bio
         node.first.select{|n| n.first != ">>Overrepresented sequences" }
       end
 
+      def adapter_content
+        node = @object.select{|a| a.first.first == ">>Adapter Content" }
+        node.first.select{|n| n.first != ">>Adapter Content" }
+      end
+
       def kmer_content
         node = @object.select{|a| a.first.first == ">>Kmer Content" }
         node.first.select{|n| n.first != ">>Kmer Content" }
@@ -222,6 +227,7 @@ module Bio
           sequence_length_distribution: self.sequence_length_distribution,
           total_duplicate_percentage: self.total_duplicate_percentage,	        sequence_duplication_levels: self.sequence_duplication_levels,
           overrepresented_sequences: self.overrepresented_sequences,
+          adapter_content: self.adapter_content,
           kmer_content: self.kmer_content,
           min_length: self.min_length,
           max_length: self.max_length,
