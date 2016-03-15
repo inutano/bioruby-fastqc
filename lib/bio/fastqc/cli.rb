@@ -6,11 +6,12 @@ require 'json'
 module Bio
   module FastQC
     class CLI < Thor
-      desc "parse [filename]", "parse fastqc data in fastqc directory or zipfile, output in json format"
+      desc "parse [--format format] [filename]", "parse fastqc data in fastqc directory or zipfile, output in json or json-ld format."
+      option :format, :default => "json"
       def parse(file)
         data = Data.read(file)
         summary = Parser.new(data).summary
-        puts JSON.dump(summary)
+        puts Converter.new(summary).convert_to(options[:format])
       rescue
         puts "Wrong input file type: specify fastqc result data, directory or zipfile"
       end
