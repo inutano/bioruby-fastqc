@@ -8,13 +8,23 @@ module Bio
       end
 
       def json_ld_object
+        object = [object_core, static_value_modules].flatten.inject(&:merge)
+        object["hasMatrix"] = matrix_modules
+        object
+      end
+
+      def identifier
+        "http://me.com/data/QNT" + @summary[:filename].split(".").first
+      end
+
+      def object_core
         {
           "@context" => jsonld_context,
-          "@graph" => module_object_array.inject(&:merge),
+          "@id" => identifier,
         }
       end
 
-      def module_object_array
+      def static_value_modules
         [
           fastqc_version,
           filename,
@@ -24,18 +34,7 @@ module Bio
           filtered_sequences,
           sequence_length,
           percent_gc,
-          per_base_sequence_quality,
-          per_tile_sequence_quality,
-          per_sequence_quality_scores,
-          per_base_sequence_content,
-          per_sequence_gc_content,
-          per_base_n_content,
-          sequence_length_distribution,
           total_duplicate_percentage,
-          sequence_duplication_levels,
-          overrepresented_sequences,
-          adapter_content,
-          kmer_content,
           min_length,
           max_length,
           overall_mean_quality_score,
@@ -43,6 +42,22 @@ module Bio
           overall_n_content,
           mean_sequence_length,
           median_sequence_length,
+        ]
+      end
+
+      def matrix_modules
+        [
+          per_base_sequence_quality,
+          per_tile_sequence_quality,
+          per_sequence_quality_scores,
+          per_base_sequence_content,
+          per_sequence_gc_content,
+          per_base_n_content,
+          sequence_length_distribution,
+          sequence_duplication_levels,
+          overrepresented_sequences,
+          adapter_content,
+          kmer_content,
         ]
       end
 
@@ -117,10 +132,8 @@ module Bio
 
       def per_base_sequence_quality
         {
-          "hasMatrix" => {
-            "@type" => "PerBaseSequenceQuality",
-            "hasRow" => per_base_sequence_quality_rows(@summary[:per_base_sequence_quality]),
-          }
+          "@type" => "PerBaseSequenceQuality",
+          "hasRow" => per_base_sequence_quality_rows(@summary[:per_base_sequence_quality]),
         }
       end
 
@@ -175,10 +188,8 @@ module Bio
 
       def per_sequence_quality_scores
         {
-          "hasMatrix" => {
-            "@type" => "PerSequnceQualityScores",
-            "hasRow" => per_sequence_quality_scores_rows(@summary[:per_sequence_quality_scores]),
-          }
+          "@type" => "PerSequnceQualityScores",
+          "hasRow" => per_sequence_quality_scores_rows(@summary[:per_sequence_quality_scores]),
         }
       end
 
@@ -203,10 +214,8 @@ module Bio
 
       def per_base_sequence_content
         {
-          "hasMatrix" => {
-            "@type" => "PerBaseSequenceContent",
-            "hasRow" => per_base_sequence_content_rows(@summary[:per_base_sequence_content]),
-          }
+          "@type" => "PerBaseSequenceContent",
+          "hasRow" => per_base_sequence_content_rows(@summary[:per_base_sequence_content]),
         }
       end
 
@@ -250,10 +259,8 @@ module Bio
 
       def per_sequence_gc_content
         {
-          "hasMatrix" => {
-            "@type" => "PerSequenceGCContent",
-            "hasRow" => per_sequence_gc_content_rows(@summary[:per_sequence_gc_content]),
-          }
+          "@type" => "PerSequenceGCContent",
+          "hasRow" => per_sequence_gc_content_rows(@summary[:per_sequence_gc_content]),
         }
       end
 
@@ -278,10 +285,8 @@ module Bio
 
       def per_base_n_content
         {
-          "hasMatrix" => {
-            "@type" => "PerBaseNContent",
-            "hasRow" => per_base_n_content_rows(@summary[:per_base_n_content]),
-          }
+          "@type" => "PerBaseNContent",
+          "hasRow" => per_base_n_content_rows(@summary[:per_base_n_content]),
         }
       end
 
@@ -307,10 +312,8 @@ module Bio
 
       def sequence_length_distribution
         {
-          "hasMatrix" => {
-            "@type" => "SequenceLengthDistribution",
-            "hasRow" => sequence_length_distribution_rows(@summary[:sequence_length_distribution]),
-          }
+          "@type" => "SequenceLengthDistribution",
+          "hasRow" => sequence_length_distribution_rows(@summary[:sequence_length_distribution]),
         }
       end
 
@@ -342,10 +345,8 @@ module Bio
 
       def sequence_duplication_levels
         {
-          "hasMatrix" => {
-            "@type" => "SequenceDuplicationLevels",
-            "hasRow" => sequence_duplication_levels_rows(@summary[:sequence_duplication_levels]),
-          }
+          "@type" => "SequenceDuplicationLevels",
+          "hasRow" => sequence_duplication_levels_rows(@summary[:sequence_duplication_levels]),
         }
       end
 
@@ -373,10 +374,8 @@ module Bio
 
       def overrepresented_sequences
         {
-          "hasMatrix" => {
-            "@type" => "OverrepresentedSequences",
-            "hasRow" => overrepresented_sequences_rows(@summary[:overrepresented_sequences]),
-          }
+          "@type" => "OverrepresentedSequences",
+          "hasRow" => overrepresented_sequences_rows(@summary[:overrepresented_sequences]),
         }
       end
 
@@ -411,10 +410,8 @@ module Bio
 
       def kmer_content
         {
-          "hasMatrix" => {
-            "@type" => "KmerContent",
-            "hasRow" => kmer_content_rows(@summary[:kmer_content]),
-          }
+          "@type" => "KmerContent",
+          "hasRow" => kmer_content_rows(@summary[:kmer_content]),
         }
       end
 
@@ -512,17 +509,47 @@ module Bio
         }
       end
 
-      ## Generate JSON-LD context object
+      #
+      # Generate JSON-LD context object
+      #
 
       def jsonld_context
         # definition of imported terms in @context
         object = imported_keywords
 
-        # definition of local ontology terms in @context
-        sos_terms.each do |term|
+        # definition of local ontology terms
+        domain = "http://me.com/sos#"
+
+        # definition of class in @context
+        sos_class.each do |term|
           object[term] = {}
-          object[term]["@id"] = "http://me.com/sos#" + term
+          object[term]["@id"] = domain + term
           object[term]["@type"] = "@id"
+        end
+
+        # definition of object properties in @context
+        sos_object_properties.each do |term|
+          object[term] = {}
+          object[term]["@id"] = domain + term
+          object[term]["@type"] = "@id"
+        end
+
+        sos_data_properties_string.each do |term|
+          object[term] = {}
+          object[term]["@id"] = domain + term
+          object[term]["@type"] = "http://www.w3.org/2001/XMLSchema#string"
+        end
+
+        sos_data_properties_integer.each do |term|
+          object[term] = {}
+          object[term]["@id"] = domain + term
+          object[term]["@type"] = "http://www.w3.org/2001/XMLSchema#integer"
+        end
+
+        sos_data_properties_float.each do |term|
+          object[term] = {}
+          object[term]["@id"] = domain + term
+          object[term]["@type"] = "http://www.w3.org/2001/XMLSchema#float"
         end
 
         object
@@ -537,12 +564,9 @@ module Bio
         }
       end
 
-      def sos_terms
-        [
-          sos_class,
-          sos_predicates,
-        ].flatten
-      end
+      #
+      # definition of classes
+      #
 
       def sos_class
         [
@@ -587,43 +611,18 @@ module Bio
         ]
       end
 
-      def sos_predicates
-        [
-          sos_predicates_general,
-          sos_predicates_matrix,
-          sos_predicates_row,
-          sos_predicates_value,
-          sos_predicates_quanto,
-        ].flatten
-      end
+      #
+      # definition of predicates
+      #
 
-      def sos_predicates_general
+      def sos_object_properties
         [
           "hasMatrix",
-          "filename",
-          "fileType",
-          "encoding",
           "totalSequences",
           "filteredSequences",
           "sequenceLength",
           "percentGC",
-        ]
-      end
-
-      def sos_predicates_matrix
-        [
           "hasRow",
-        ]
-      end
-
-      def sos_predicates_row
-        [
-          "rowIndex",
-          "baseCallQuality",
-          "baseCallQuality10thPercentile",
-          "baseCallQuality90thPercentile",
-          "baseCallQualityLowerQuartile",
-          "baseCallQualityUpperQuartile",
           "basePosition",
           "kmerSequence",
           "meanBaseCallQuality",
@@ -632,36 +631,50 @@ module Bio
           "observedPerExpectedMax",
           "observedPerExpectedMaxPosition",
           "observedPerExpectedOverall",
-          "overrepresentedSequence",
           "percentAdenine",
           "percentCytosine",
           "percentGC",
           "percentGuanine",
           "percentThymine",
-          "possibleSourceOfSequence",
           "sequenceDuplicationLevel",
           "sequenceReadCount",
           "sequenceReadLength",
           "sequenceReadPercentage",
           "sequenceReadRelativeCount",
-        ]
-      end
-
-      def sos_predicates_value
-        [
           "hasUnit",
+          "overallMeanBaseCallQuality",
+          "overallMedianBaseCallQuality",
+          "overallNContent",
         ]
       end
 
-      def sos_predicates_quanto
+      def sos_data_properties_string
         [
+          "filename",
+          "fileType",
+          "encoding",
+          "possibleSourceOfSequence",
+          "overrepresentedSequence",
+        ]
+      end
+
+      def sos_data_properties_integer
+        [
+          "rowIndex",
+        ]
+      end
+
+      def sos_data_properties_float
+        [
+          "baseCallQuality",
+          "baseCallQuality10thPercentile",
+          "baseCallQuality90thPercentile",
+          "baseCallQualityLowerQuartile",
+          "baseCallQualityUpperQuartile",
           "minSequenceLength",
           "maxSequenceLength",
           "meanSequenceLength",
           "medianSequenceLength",
-          "overallMeanBaseCallQuality",
-          "overallMedianBaseCallQuality",
-          "overallNContent",
         ]
       end
     end
