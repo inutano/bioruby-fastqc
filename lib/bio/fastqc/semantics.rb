@@ -130,8 +130,8 @@ module Bio
           median = row[2]
           lower_quartile = row[3]
           upper_quartile = row[4]
-          10th_percentile = row[5]
-          90th_percentile = row[6]
+          tenth_percentile = row[5]
+          ninetieth_percentile = row[6]
 
           {
             "@type" => [
@@ -158,11 +158,11 @@ module Bio
             },
             "baseCallQuality10thPercentile" => {
               "@type" => "PhredQualityScore",
-              "value" => 10th_percentile,
+              "value" => tenth_percentile,
             },
             "baseCallQuality90thPercentile" => {
               "@type" => "PhredQualityScore",
-              "value" => 90th_percentile,
+              "value" => ninetieth_percentile,
             },
           }
         end
