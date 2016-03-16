@@ -77,135 +77,143 @@ module Bio
       end
 
       def per_base_sequence_quality
-        node = @object.select{|a| a.first.first == ">>Per base sequence quality" }
-        node.first.select{|n| n.first != ">>Per base sequence quality" }
+        node = @object.select{|a| a.first.first == ">>Per base sequence quality" }.first
+        node.select{|n| n.first != ">>Per base sequence quality" } if node
       end
 
       ## Custom module: overall mean base call quality indicator
       def overall_mean_quality_score
         per_base = self.per_base_sequence_quality
-        v = per_base.map{|c| (10**(c[1].to_f/-10)).to_f }
-        -10 * Math.log10(v.reduce(:+) / v.size)
+        if per_base
+          v = per_base.map{|c| (10**(c[1].to_f/-10)).to_f }
+          -10 * Math.log10(v.reduce(:+) / v.size)
+        end
       end
 
       ## Custom module: overall median base call quality indicator
       def overall_median_quality_score
         per_base = self.per_base_sequence_quality
-        v = per_base.map{|c| (10**(c[2].to_f/-10)).to_f }
-        -10 * Math.log10(v.reduce(:+) / v.size)
+        if per_base
+          v = per_base.map{|c| (10**(c[2].to_f/-10)).to_f }
+          -10 * Math.log10(v.reduce(:+) / v.size)
+        end
       end
 
       def per_tile_sequence_quality
-        node = @object.select{|a| a.first.first == ">>Per tile sequence quality" }
-        node.first.select{|n| n.first != ">>Per tile sequence quality" }
-      rescue
-        []
+        node = @object.select{|a| a.first.first == ">>Per tile sequence quality" }.first
+        node.select{|n| n.first != ">>Per tile sequence quality" } if node
       end
 
       def per_sequence_quality_scores
-        node = @object.select{|a| a.first.first == ">>Per sequence quality scores" }
-        node.first.select{|n| n.first != ">>Per sequence quality scores" }
+        node = @object.select{|a| a.first.first == ">>Per sequence quality scores" }.first
+        node.select{|n| n.first != ">>Per sequence quality scores" } if node
       end
 
       def per_base_sequence_content
-        node = @object.select{|a| a.first.first == ">>Per base sequence content" }
-        node.first.select{|n| n.first != ">>Per base sequence content" }
+        node = @object.select{|a| a.first.first == ">>Per base sequence content" }.first
+        node.select{|n| n.first != ">>Per base sequence content" } if node
       end
 
       def per_sequence_gc_content
-        node = @object.select{|a| a.first.first == ">>Per sequence GC content" }
-        node.first.select{|n| n.first != ">>Per sequence GC content" }
+        node = @object.select{|a| a.first.first == ">>Per sequence GC content" }.first
+        node.select{|n| n.first != ">>Per sequence GC content" } if node
       end
 
       def per_sequence_gc_content
-        node = @object.select{|a| a.first.first == ">>Per sequence GC content" }
-        node.first.select{|n| n.first != ">>Per sequence GC content" }
+        node = @object.select{|a| a.first.first == ">>Per sequence GC content" }.first
+        node.select{|n| n.first != ">>Per sequence GC content" } if node
       end
 
       def per_base_n_content
-        node = @object.select{|a| a.first.first == ">>Per base N content" }
-        node.first.select{|n| n.first != ">>Per base N content" }
+        node = @object.select{|a| a.first.first == ">>Per base N content" }.first
+        node.select{|n| n.first != ">>Per base N content" } if node
       end
 
       ## Custom module: overall N content
       def overall_n_content
         per_base = self.per_base_n_content
-        v = per_base.map{|c| c[1].to_f }
-        v.reduce(:+) / v.size
+        if per_base
+          v = per_base.map{|c| c[1].to_f }
+          v.reduce(:+) / v.size
+        end
       end
 
       def sequence_length_distribution
-        node = @object.select{|a| a.first.first == ">>Sequence Length Distribution" }
-        node.first.select{|n| n.first != ">>Sequence Length Distribution" }
+        node = @object.select{|a| a.first.first == ">>Sequence Length Distribution" }.first
+        node.select{|n| n.first != ">>Sequence Length Distribution" } if node
       end
 
       ## Custom module: mean sequence length calculated from distribution
       def mean_sequence_length
         distribution = self.sequence_length_distribution
-        sum = distribution.map do |length_count|
-          length = length_count[0]
-          count = length_count[1].to_f
-          if length =~ /\d-\d/
-            f = length.sub(/-\d+$/,"").to_i
-            b = length.sub(/^\d+-/,"").to_i
-            mean = (f + b) / 2
-            mean * count
-          else
-            length.to_i * count
+        if distribution
+          sum = distribution.map do |length_count|
+            length = length_count[0]
+            count = length_count[1].to_f
+            if length =~ /\d-\d/
+              f = length.sub(/-\d+$/,"").to_i
+              b = length.sub(/^\d+-/,"").to_i
+              mean = (f + b) / 2
+              mean * count
+            else
+              length.to_i * count
+            end
           end
+          sum.reduce(:+) / self.total_sequences
         end
-        sum.reduce(:+) / self.total_sequences
       end
 
       ## Custom module: median sequence length calculated from distribution
       def median_sequence_length
         distribution = self.sequence_length_distribution
-        array = distribution.map do |length_count|
-          length = length_count[0]
-          count = length_count[1].to_i
-          if length =~ /\d-\d/
-            f = length.sub(/-\d+$/,"").to_i
-            b = length.sub(/^\d+-/,"").to_i
-            mean = (f + b) / 2
-            [mean.to_f] * count
-          else
-            [length.to_f] * count
+        if distribution
+          array = distribution.map do |length_count|
+            length = length_count[0]
+            count = length_count[1].to_i
+            if length =~ /\d-\d/
+              f = length.sub(/-\d+$/,"").to_i
+              b = length.sub(/^\d+-/,"").to_i
+              mean = (f + b) / 2
+              [mean.to_f] * count
+            else
+              [length.to_f] * count
+            end
           end
-        end
-        sorted = array.flatten.sort
-        quot = sorted.size / 2
-        if !sorted.size.even?
-          sorted[quot]
-        else
-          f = sorted[quot]
-          b = sorted[quot - 1]
-          (f + b) / 2
+          sorted = array.flatten.sort
+          quot = sorted.size / 2
+          if !sorted.size.even?
+            sorted[quot]
+          else
+            f = sorted[quot]
+            b = sorted[quot - 1]
+            (f + b) / 2
+          end
         end
       end
 
       def sequence_duplication_levels
-        node = @object.select{|a| a.first.first == ">>Sequence Duplication Levels" }
-        node.first.select{|n| n.first != ">>Sequence Duplication Levels" && n.first != "\#Total Duplicate Percentage" }
+        node = @object.select{|a| a.first.first == ">>Sequence Duplication Levels" }.first
+        node.select{|n| n.first != ">>Sequence Duplication Levels" && n.first != "\#Total Duplicate Percentage" } if node
       end
 
       def total_duplicate_percentage
-        node = @object.select{|a| a.first.first == ">>Sequence Duplication Levels" }
-        node.first.select{|n| n.first == "\#Total Duplicate Percentage" }.flatten[1].to_f
+        node = @object.select{|a| a.first.first == ">>Sequence Duplication Levels" }.first
+        node.select{|n| n.first == "\#Total Duplicate Percentage" }.flatten[1].to_f if node
       end
 
       def overrepresented_sequences
-        node = @object.select{|a| a.first.first == ">>Overrepresented sequences" }
-        node.first.select{|n| n.first != ">>Overrepresented sequences" }
+        node = @object.select{|a| a.first.first == ">>Overrepresented sequences" }.first
+        node.select{|n| n.first != ">>Overrepresented sequences" } if node
       end
 
       def adapter_content
-        node = @object.select{|a| a.first.first == ">>Adapter Content" }
-        node.first.select{|n| n.first != ">>Adapter Content" }
+        node = @object.select{|a| a.first.first == ">>Adapter Content" }.first
+        node.select{|n| n.first != ">>Adapter Content" } if node
       end
 
       def kmer_content
-        node = @object.select{|a| a.first.first == ">>Kmer Content" }
-        node.first.select{|n| n.first != ">>Kmer Content" }
+        node = @object.select{|a| a.first.first == ">>Kmer Content" }.first
+        node.select{|n| n.first != ">>Kmer Content" } if node
       end
 
       def summary
