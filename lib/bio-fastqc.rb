@@ -11,4 +11,6 @@
 require 'bio/fastqc/data'
 require 'bio/fastqc/cli'
 require 'bio/fastqc/parser'
+require 'bio/fastqc/converter'
+require 'bio/fastqc/semantics'
 require 'bio/fastqc'
