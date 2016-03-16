@@ -56,6 +56,7 @@ module Bio
       end
 
       def fastqc_version
+        {}
       end
 
       def filename
@@ -81,7 +82,7 @@ module Bio
           "totalSequences" => {
             "@type" => "SequenceReadContent",
             "hasUnit" => "countUnit",
-            "value" => summary[:total_sequences],
+            "value" => @summary[:total_sequences],
           }
         }
       end
@@ -91,7 +92,7 @@ module Bio
           "filteredSequences" => {
             "@type" => "SequenceReadContent",
             "hasUnit" => "countUnit",
-            "value" => summary[:filtered_sequences],
+            "value" => @summary[:filtered_sequences],
           }
         }
       end
@@ -100,7 +101,7 @@ module Bio
         {
           "sequenceLength" => {
             "@type" => "SequenceReadLength",
-            "value" => summary[:sequence_length],
+            "value" => @summary[:sequence_length],
           }
         }
       end
@@ -109,7 +110,7 @@ module Bio
         {
           "percentGC" => {
             "@type" => "NucleotideBaseContent",
-            "value" => summary[:percent_gc],
+            "value" => @summary[:percent_gc],
           }
         }
       end
@@ -118,7 +119,7 @@ module Bio
         {
           "hasMatrix" => {
             "@type" => "PerBaseSequenceQuality",
-            "hasRow" => per_base_sequence_quality_rows(summary[:per_base_sequence_quality]),
+            "hasRow" => per_base_sequence_quality_rows(@summary[:per_base_sequence_quality]),
           }
         }
       end
@@ -169,18 +170,19 @@ module Bio
       end
 
       def per_tile_sequence_quality
+        {}
       end
 
-      def per_sequnce_quality_scores
+      def per_sequence_quality_scores
         {
           "hasMatrix" => {
             "@type" => "PerSequnceQualityScores",
-            "hasRow" => per_sequnce_quality_scores_rows(summary[:per_sequnce_quality_scores]),
+            "hasRow" => per_sequence_quality_scores_rows(@summary[:per_sequence_quality_scores]),
           }
         }
       end
 
-      def per_sequnce_quality_scores_rows(matrix)
+      def per_sequence_quality_scores_rows(matrix)
         matrix.map.with_index do |row, i|
           quality = row[0]
           count = row[1]
@@ -203,7 +205,7 @@ module Bio
         {
           "hasMatrix" => {
             "@type" => "PerBaseSequenceContent",
-            "hasRow" => per_base_sequence_content_rows(summary[:per_base_sequence_content]),
+            "hasRow" => per_base_sequence_content_rows(@summary[:per_base_sequence_content]),
           }
         }
       end
@@ -250,7 +252,7 @@ module Bio
         {
           "hasMatrix" => {
             "@type" => "PerSequenceGCContent",
-            "hasRow" => per_sequence_gc_content_rows(summary[:per_sequence_gc_content]),
+            "hasRow" => per_sequence_gc_content_rows(@summary[:per_sequence_gc_content]),
           }
         }
       end
@@ -278,7 +280,7 @@ module Bio
         {
           "hasMatrix" => {
             "@type" => "PerBaseNContent",
-            "hasRow" => per_base_n_content_rows(summary[:per_base_n_content]),
+            "hasRow" => per_base_n_content_rows(@summary[:per_base_n_content]),
           }
         }
       end
@@ -307,7 +309,7 @@ module Bio
         {
           "hasMatrix" => {
             "@type" => "SequenceLengthDistribution",
-            "hasRow" => sequence_length_distribution_rows(summary[:sequence_length_distribution]),
+            "hasRow" => sequence_length_distribution_rows(@summary[:sequence_length_distribution]),
           }
         }
       end
@@ -335,13 +337,14 @@ module Bio
       end
 
       def total_duplicate_percentage
+        {}
       end
 
       def sequence_duplication_levels
         {
           "hasMatrix" => {
             "@type" => "SequenceDuplicationLevels",
-            "hasRow" => sequence_duplication_levels_rows(summary[:sequence_duplication_levels]),
+            "hasRow" => sequence_duplication_levels_rows(@summary[:sequence_duplication_levels]),
           }
         }
       end
@@ -372,7 +375,7 @@ module Bio
         {
           "hasMatrix" => {
             "@type" => "OverrepresentedSequences",
-            "hasRow" => overrepresented_sequences_rows(summary[:overrepresented_sequences]),
+            "hasRow" => overrepresented_sequences_rows(@summary[:overrepresented_sequences]),
           }
         }
       end
@@ -403,13 +406,14 @@ module Bio
       end
 
       def adapter_content
+        {}
       end
 
       def kmer_content
         {
           "hasMatrix" => {
             "@type" => "KmerContent",
-            "hasRow" => kmer_content_rows(summary[:kmer_content]),
+            "hasRow" => kmer_content_rows(@summary[:kmer_content]),
           }
         }
       end

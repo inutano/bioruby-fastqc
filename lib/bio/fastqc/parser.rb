@@ -220,7 +220,7 @@ module Bio
           percent_gc: self.percent_gc,
           per_base_sequence_quality: self.per_base_sequence_quality,
           per_tile_sequence_quality: self.per_tile_sequence_quality,
-          per_sequnce_quality_scores: self.per_sequence_quality_scores,
+          per_sequence_quality_scores: self.per_sequence_quality_scores,
           per_base_sequence_content: self.per_base_sequence_content,
           per_sequence_gc_content: self.per_sequence_gc_content,
           per_base_n_content: self.per_base_n_content,
