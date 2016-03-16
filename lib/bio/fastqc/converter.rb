@@ -21,7 +21,7 @@ module Bio
       end
 
       def to_jsonld
-        json_ld_object = Semantics.new(@summary_json)
+        json_ld_object = Semantics.new(@summary_json).json_ld_object
         JSON.dump(json_ld_object)
       end
     end

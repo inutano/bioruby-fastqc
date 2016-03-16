@@ -7,7 +7,7 @@ module Bio
         @summary = summary_json
       end
 
-      def merged_object
+      def json_ld_object
         {
           "@context" => jsonld_context,
           "@graph" => module_object_array.inject(&:merge),
