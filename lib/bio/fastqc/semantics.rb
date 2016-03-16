@@ -6,7 +6,8 @@ require 'rdf/turtle'
 module Bio
   module FastQC
     class Semantics
-      def initialize(summary_json)
+      def initialize(summary_json, id: nil)
+        @id = id
         @summary = summary_json
       end
 
@@ -30,7 +31,11 @@ module Bio
       end
 
       def identifier
-        "http://me.com/data/QNT" + @summary[:filename].split(".").first
+        if @id
+          @id
+        else
+          "http://me.com/data/QNT" + @summary[:filename].split(".").first
+        end
       end
 
       def object_core

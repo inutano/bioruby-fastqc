@@ -3,7 +3,8 @@
 module Bio
   module FastQC
     class Converter
-      def initialize(summary_json)
+      def initialize(summary_json, id: nil)
+        @id = id
         @summary_json = summary_json
       end
 
@@ -19,16 +20,25 @@ module Bio
       end
 
       def to_json
-        JSON.dump(@summary_json)
+        json = if @id
+                 { @id => @summary_json }
+               else
+                 @summary_json
+               end
+        JSON.dump(json)
       end
 
       def to_jsonld
-        json_ld_object = Semantics.new(@summary_json).json_ld_object
+        json_ld_object = Semantics.new(@summary_json, id: @id).json_ld_object
         JSON.dump(json_ld_object)
       end
 
       def to_turtle
-        Semantics.new(@summary_json).turtle
+        Semantics.new(@summary_json, id: @id).turtle
+      end
+
+      def to_ttl
+        to_turtle
       end
     end
   end
