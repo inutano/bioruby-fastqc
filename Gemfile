@@ -21,5 +21,5 @@ group :development do
   gem 'simplecov', '~> 0.10'
 
   gem 'pry', '~> 0.10'
-  gem 'bio-fastqc', '0.3.0'
+  gem 'bio-fastqc'
 end
