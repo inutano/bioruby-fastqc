@@ -10,7 +10,7 @@ module Bio
       def merged_object
         {
           "@context" => jsonld_context,
-          "@graph" => module_object_array.inject(&:merge)
+          "@graph" => module_object_array.inject(&:merge),
         }
       end
 
@@ -136,7 +136,7 @@ module Bio
           {
             "@type" => [
               "Row",
-              base_stat_class(base)
+              base_stat_class(base),
             ],
             "rowIndex" => i,
             "basePosition" => base,
@@ -290,7 +290,7 @@ module Bio
           {
             "@type" => [
               "Row",
-              base_stat_class(base)
+              base_stat_class(base),
             ],
             "rowIndex" => i,
             "basePosition" => base,
@@ -427,12 +427,12 @@ module Bio
             "kmerSequence" => sequence,
             "sequenceReadCount" => {
               "@type" => "SequenceReadContent",
-              "hasUnit" => "countUnit"
+              "hasUnit" => "countUnit",
               "value" => count,
             },
             "observedPerExpectedOverall" => {
               "@type" => "SequenceReadContent",
-              "hasUnit" => "ratio"
+              "hasUnit" => "ratio",
               "value" => ratio_overall,
             },
             "observedPerExpectedMax" => {
@@ -587,7 +587,7 @@ module Bio
           sos_predicates_matrix,
           sos_predicates_row,
           sos_predicates_value,
-          sos_predicates_quanto
+          sos_predicates_quanto,
         ].flatten
       end
 
