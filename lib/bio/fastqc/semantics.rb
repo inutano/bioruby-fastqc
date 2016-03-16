@@ -473,9 +473,11 @@ module Bio
       end
 
       def median_sequence_length
-        "medianSequenceLength" => {
-          "@type" => "SequenceReadLength",
-          "value" => @summary[:median_sequence_length],
+        {
+            "medianSequenceLength" => {
+            "@type" => "SequenceReadLength",
+            "value" => @summary[:median_sequence_length],
+          }
         }
       end
 
