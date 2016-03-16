@@ -13,6 +13,8 @@ module Bio
           to_json
         when "json-ld"
           to_jsonld
+        when "turtle"
+          to_turtle
         end
       end
 
@@ -23,6 +25,10 @@ module Bio
       def to_jsonld
         json_ld_object = Semantics.new(@summary_json).json_ld_object
         JSON.dump(json_ld_object)
+      end
+
+      def to_turtle
+        Semantics.new(@summary_json).turtle
       end
     end
   end

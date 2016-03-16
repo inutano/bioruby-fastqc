@@ -5,6 +5,8 @@ source "http://rubygems.org"
 
 gem 'rubyzip', '~> 1.1', '>= 1.1.0'
 gem 'thor', "~> 0.19.1"
+gem 'json-ld', '~> 1.99'
+gem 'rdf-turtle', '~> 1.99'
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
@@ -19,5 +21,5 @@ group :development do
   gem 'simplecov', '~> 0.10'
 
   gem 'pry', '~> 0.10'
-  gem 'bio-fastqc'
+  gem 'bio-fastqc', '0.3.0'
 end
