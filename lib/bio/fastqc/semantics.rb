@@ -12,9 +12,11 @@ module Bio
       end
 
       def turtle
-        object = json_ld_object
-        graph = RDF::Graph.new << JSON::LD::API.toRdf(object)
-        graph.dump(:ttl, prefixes: turtle_prefixes)
+        turtle_graph.dump(:ttl, prefixes: turtle_prefixes)
+      end
+
+      def turtle_graph
+        RDF::Graph.new << JSON::LD::API.toRdf(json_ld_object)
       end
 
       def turtle_prefixes
