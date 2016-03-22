@@ -14,9 +14,9 @@ module Bio
         case format
         when "json"
           write_json(output_file)
-        when "json-ld"
+        when "json-ld", "jsonld"
           write_jsonld(output_file)
-        when "turtle"
+        when "turtle", "ttl"
           write_ttl(output_file)
         when "tsv"
           write_tsv(output_file)
