@@ -34,8 +34,10 @@ module Bio
       end
 
       def write_ttl(output_file)
-        graph = Semantics.new(@summary_json, id: @id).turtle_graph
-        RDF::Turtle::Writer.open(output_file) do |writer|
+        semantics = Semantics.new(@summary_json, id: @id)
+        graph = semantics.turtle_graph
+        prefixes = semantics.turtle_prefixes
+        RDF::Turtle::Writer.open(output_file, prefixes: prefixes) do |writer|
           writer << graph
         end
       end
