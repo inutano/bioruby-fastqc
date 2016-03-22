@@ -6,7 +6,7 @@ require 'json'
 module Bio
   module FastQC
     class CLI < Thor
-      desc "parse [--format format] [filename]", "parse fastqc data in fastqc directory or zipfile, output in json, json-ld, or rdf-turtle format."
+      desc "parse [--format format] [filename]", "parse fastqc data in fastqc directory or zipfile. output format: json (--json), json-ld (--jsonld), rdf-turtle (--ttl), or one-line tsv format (--tsv)."
       option :format, :default => "json"
       def parse(file)
         data = Data.read(file)

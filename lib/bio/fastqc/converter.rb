@@ -16,6 +16,8 @@ module Bio
           to_jsonld
         when "turtle"
           to_turtle
+        when "tsv"
+          to_tsv
         end
       end
 
@@ -39,6 +41,35 @@ module Bio
 
       def to_ttl
         to_turtle
+      end
+
+      def to_tsv
+        identifier = if @id
+                       @id
+                     else
+                       @summary_json[:filename].split(".").first
+                     end
+
+        # return one-line tab separated value
+        [
+          identifier,
+          @summary_json[:fastqc_version],
+          @summary_json[:filename],
+          @summary_json[:file_type],
+          @summary_json[:encoding],
+          @summary_json[:total_sequences],
+          @summary_json[:filtered_sequences],
+          @summary_json[:sequence_length],
+          @summary_json[:min_length],
+          @summary_json[:max_length],
+          @summary_json[:mean_sequence_length],
+          @summary_json[:median_sequence_length],
+          @summary_json[:percent_gc],
+          @summary_json[:total_duplicate_percentage],
+          @summary_json[:overall_mean_quality_score],
+          @summary_json[:overall_median_quality_score],
+          @summary_json[:overall_n_content],
+        ].join("\t")
       end
     end
   end
