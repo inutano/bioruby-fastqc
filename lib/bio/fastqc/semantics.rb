@@ -6,9 +6,9 @@ require 'rdf/turtle'
 module Bio
   module FastQC
     class Semantics
-      def initialize(summary_json, id: nil)
+      def initialize(fastqc_object, id: nil)
         @id = id
-        @summary = summary_json
+        @fastqc_object = fastqc_object
       end
 
       def turtle
@@ -36,7 +36,7 @@ module Bio
         if @id
           @id
         else
-          "http://me.com/data/QNT" + @summary[:filename].split(".").first
+          "http://me.com/data/QNT" + @fastqc_object[:filename].split(".").first
         end
       end
 
@@ -99,19 +99,19 @@ module Bio
 
       def filename
         {
-          "filename" => @summary[:filename],
+          "filename" => @fastqc_object[:filename],
         }
       end
 
       def file_type
         {
-          "fileType" => @summary[:file_type],
+          "fileType" => @fastqc_object[:file_type],
         }
       end
 
       def encoding
         {
-          "encoding" => @summary[:encoding],
+          "encoding" => @fastqc_object[:encoding],
         }
       end
 
@@ -120,7 +120,7 @@ module Bio
           "totalSequences" => {
             "@type" => "SequenceReadContent",
             "hasUnit" => "uo:CountUnit",
-            "rdf:value" => @summary[:total_sequences],
+            "rdf:value" => @fastqc_object[:total_sequences],
           }
         }
       end
@@ -130,7 +130,7 @@ module Bio
           "filteredSequences" => {
             "@type" => "SequenceReadContent",
             "hasUnit" => "uo:CountUnit",
-            "rdf:value" => @summary[:filtered_sequences],
+            "rdf:value" => @fastqc_object[:filtered_sequences],
           }
         }
       end
@@ -140,7 +140,7 @@ module Bio
           "sequenceLength" => {
             "@type" => "SequenceReadLength",
             "hasUnit" => "uo:CountUnit",
-            "rdf:value" => @summary[:sequence_length],
+            "rdf:value" => @fastqc_object[:sequence_length],
           }
         }
       end
@@ -150,7 +150,7 @@ module Bio
           "percentGC" => {
             "@type" => "NucleotideBaseContent",
             "hasUnit" => "uo:CountUnit",
-            "rdf:value" => @summary[:percent_gc],
+            "rdf:value" => @fastqc_object[:percent_gc],
           }
         }
       end
@@ -158,7 +158,7 @@ module Bio
       def per_base_sequence_quality
         {
           "@type" => "PerBaseSequenceQuality",
-          "hasRow" => per_base_sequence_quality_rows(@summary[:per_base_sequence_quality]),
+          "hasRow" => per_base_sequence_quality_rows(@fastqc_object[:per_base_sequence_quality]),
         }
       end
 
@@ -220,7 +220,7 @@ module Bio
       def per_sequence_quality_scores
         {
           "@type" => "PerSequnceQualityScores",
-          "hasRow" => per_sequence_quality_scores_rows(@summary[:per_sequence_quality_scores]),
+          "hasRow" => per_sequence_quality_scores_rows(@fastqc_object[:per_sequence_quality_scores]),
         }
       end
 
@@ -248,7 +248,7 @@ module Bio
       def per_base_sequence_content
         {
           "@type" => "PerBaseSequenceContent",
-          "hasRow" => per_base_sequence_content_rows(@summary[:per_base_sequence_content]),
+          "hasRow" => per_base_sequence_content_rows(@fastqc_object[:per_base_sequence_content]),
         }
       end
 
@@ -293,7 +293,7 @@ module Bio
       def per_sequence_gc_content
         {
           "@type" => "PerSequenceGCContent",
-          "hasRow" => per_sequence_gc_content_rows(@summary[:per_sequence_gc_content]),
+          "hasRow" => per_sequence_gc_content_rows(@fastqc_object[:per_sequence_gc_content]),
         }
       end
 
@@ -321,7 +321,7 @@ module Bio
       def per_base_n_content
         {
           "@type" => "PerBaseNContent",
-          "hasRow" => per_base_n_content_rows(@summary[:per_base_n_content]),
+          "hasRow" => per_base_n_content_rows(@fastqc_object[:per_base_n_content]),
         }
       end
 
@@ -348,7 +348,7 @@ module Bio
       def sequence_length_distribution
         {
           "@type" => "SequenceLengthDistribution",
-          "hasRow" => sequence_length_distribution_rows(@summary[:sequence_length_distribution]),
+          "hasRow" => sequence_length_distribution_rows(@fastqc_object[:sequence_length_distribution]),
         }
       end
 
@@ -381,7 +381,7 @@ module Bio
       def sequence_duplication_levels
         {
           "@type" => "SequenceDuplicationLevels",
-          "hasRow" => sequence_duplication_levels_rows(@summary[:sequence_duplication_levels]),
+          "hasRow" => sequence_duplication_levels_rows(@fastqc_object[:sequence_duplication_levels]),
         }
       end
 
@@ -410,7 +410,7 @@ module Bio
       def overrepresented_sequences
         {
           "@type" => "OverrepresentedSequences",
-          "hasRow" => overrepresented_sequences_rows(@summary[:overrepresented_sequences]),
+          "hasRow" => overrepresented_sequences_rows(@fastqc_object[:overrepresented_sequences]),
         }
       end
 
@@ -446,7 +446,7 @@ module Bio
       def kmer_content
         {
           "@type" => "KmerContent",
-          "hasRow" => kmer_content_rows(@summary[:kmer_content]),
+          "hasRow" => kmer_content_rows(@fastqc_object[:kmer_content]),
         }
       end
 
@@ -486,7 +486,7 @@ module Bio
           "minSequenceLength" => {
             "@type" => "SequenceReadLength",
             "hasUnit" => "uo:CountUnit",
-            "rdf:value" => @summary[:min_length],
+            "rdf:value" => @fastqc_object[:min_length],
           }
         }
       end
@@ -496,7 +496,7 @@ module Bio
           "maxSequenceLength" => {
             "@type" => "SequenceReadLength",
             "hasUnit" => "uo:CountUnit",
-            "rdf:value" => @summary[:max_length],
+            "rdf:value" => @fastqc_object[:max_length],
           }
         }
       end
@@ -506,7 +506,7 @@ module Bio
           "meanSequenceLength" => {
             "@type" => "SequenceReadLength",
             "hasUnit" => "uo:CountUnit",
-            "rdf:value" => @summary[:mean_sequence_length],
+            "rdf:value" => @fastqc_object[:mean_sequence_length],
           }
         }
       end
@@ -516,7 +516,7 @@ module Bio
             "medianSequenceLength" => {
             "@type" => "SequenceReadLength",
             "hasUnit" => "uo:CountUnit",
-            "rdf:value" => @summary[:median_sequence_length],
+            "rdf:value" => @fastqc_object[:median_sequence_length],
           }
         }
       end
@@ -526,7 +526,7 @@ module Bio
           "overallMeanBaseCallQuality" => {
             "@type" => "PhredQualityScore",
             "hasUnit" => "uo:CountUnit",
-            "rdf:value" => @summary[:overall_mean_quality_score],
+            "rdf:value" => @fastqc_object[:overall_mean_quality_score],
           }
         }
       end
@@ -536,7 +536,7 @@ module Bio
           "overallMedianBaseCallQuality" => {
             "@type" => "PhredQualityScore",
             "hasUnit" => "uo:CountUnit",
-            "rdf:value" => @summary[:overall_median_quality_score],
+            "rdf:value" => @fastqc_object[:overall_median_quality_score],
           }
         }
       end
@@ -546,7 +546,7 @@ module Bio
           "overallNContent" => {
             "@type" => "NContent",
             "hasUnit" => "uo:Percentage",
-            "rdf:value" => @summary[:overall_n_content],
+            "rdf:value" => @fastqc_object[:overall_n_content],
           }
         }
       end
