@@ -32,11 +32,15 @@ module Bio
         object
       end
 
+      def uri_base
+        "http://purl.jp/bio/01/quanto"
+      end
+
       def identifier
         if @id
           @id
         else
-          "http://me.com/data/QNT" + @fastqc_object[:filename].split(".").first
+          uri_base + "/resource/QNT" + @fastqc_object[:filename].split(".").first
         end
       end
 
@@ -560,7 +564,7 @@ module Bio
         object = imported_keywords
 
         # definition of local ontology terms
-        domain = "http://me.com/sos#"
+        domain = uri_base + "/ontology/sos#"
 
         # definition of class in @context
         sos_class.each do |term|
