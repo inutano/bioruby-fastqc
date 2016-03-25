@@ -78,11 +78,7 @@ module Bio
 
       def per_base_sequence_quality
         node = @object.select{|a| a.first.first == ">>Per base sequence quality" }.first
-        #node.select{|n| n.first != ">>Per base sequence quality" } if node
-        if node
-          node.shift
-          node
-        end
+        node.select{|n| n.first != ">>Per base sequence quality" } if node
       end
 
       ## Custom module: overall mean base call quality indicator
@@ -105,56 +101,32 @@ module Bio
 
       def per_tile_sequence_quality
         node = @object.select{|a| a.first.first == ">>Per tile sequence quality" }.first
-        #node.select{|n| n.first != ">>Per tile sequence quality" } if node
-        if node
-          node.shift
-          node
-        end
+        node.select{|n| n.first != ">>Per tile sequence quality" } if node
       end
 
       def per_sequence_quality_scores
         node = @object.select{|a| a.first.first == ">>Per sequence quality scores" }.first
-        #node.select{|n| n.first != ">>Per sequence quality scores" } if node
-        if node
-          node.shift
-          node
-        end
+        node.select{|n| n.first != ">>Per sequence quality scores" } if node
       end
 
       def per_base_sequence_content
         node = @object.select{|a| a.first.first == ">>Per base sequence content" }.first
-        #node.select{|n| n.first != ">>Per base sequence content" } if node
-        if node
-          node.shift
-          node
-        end
+        node.select{|n| n.first != ">>Per base sequence content" } if node
       end
 
       def per_sequence_gc_content
         node = @object.select{|a| a.first.first == ">>Per sequence GC content" }.first
-        #node.select{|n| n.first != ">>Per sequence GC content" } if node
-        if node
-          node.shift
-          node
-        end
+        node.select{|n| n.first != ">>Per sequence GC content" } if node
       end
 
       def per_sequence_gc_content
         node = @object.select{|a| a.first.first == ">>Per sequence GC content" }.first
-        #node.select{|n| n.first != ">>Per sequence GC content" } if node
-        if node
-          node.shift
-          node
-        end
+        node.select{|n| n.first != ">>Per sequence GC content" } if node
       end
 
       def per_base_n_content
         node = @object.select{|a| a.first.first == ">>Per base N content" }.first
-        #node.select{|n| n.first != ">>Per base N content" } if node
-        if node
-          node.shift
-          node
-        end
+        node.select{|n| n.first != ">>Per base N content" } if node
       end
 
       ## Custom module: overall N content
@@ -168,11 +140,7 @@ module Bio
 
       def sequence_length_distribution
         node = @object.select{|a| a.first.first == ">>Sequence Length Distribution" }.first
-        #node.select{|n| n.first != ">>Sequence Length Distribution" } if node
-        if node
-          node.shift
-          node
-        end
+        node.select{|n| n.first != ">>Sequence Length Distribution" } if node
       end
 
       ## Custom module: mean sequence length calculated from distribution
@@ -225,47 +193,27 @@ module Bio
 
       def sequence_duplication_levels
         node = @object.select{|a| a.first.first == ">>Sequence Duplication Levels" }.first
-        #node.select{|n| n.first != ">>Sequence Duplication Levels" && n.first != "\#Total Duplicate Percentage" } if node
-        if node
-          node.shift(2)
-          node
-        end
+        node.select{|n| n.first != ">>Sequence Duplication Levels" && n.first != "\#Total Duplicate Percentage" } if node
       end
 
       def total_duplicate_percentage
         node = @object.select{|a| a.first.first == ">>Sequence Duplication Levels" }.first
-        #node.select{|n| n.first == "\#Total Duplicate Percentage" }.flatten[1].to_f if node
-        if node
-          node.shift
-          node.flatten[1].to_f
-        end
+        node.select{|n| n.first == "\#Total Duplicate Percentage" }.flatten[1].to_f if node
       end
 
       def overrepresented_sequences
         node = @object.select{|a| a.first.first == ">>Overrepresented sequences" }.first
-        #node.select{|n| n.first != ">>Overrepresented sequences" } if node
-        if node
-          node.shift
-          node
-        end
+        node.select{|n| n.first != ">>Overrepresented sequences" } if node
       end
 
       def adapter_content
         node = @object.select{|a| a.first.first == ">>Adapter Content" }.first
-        #node.select{|n| n.first != ">>Adapter Content" } if node
-        if node
-          node.shift
-          node
-        end
+        node.select{|n| n.first != ">>Adapter Content" } if node
       end
 
       def kmer_content
         node = @object.select{|a| a.first.first == ">>Kmer Content" }.first
-        #node.select{|n| n.first != ">>Kmer Content" } if node
-        if node
-          node.shift
-          node
-        end
+        node.select{|n| n.first != ">>Kmer Content" } if node
       end
 
       def summary
