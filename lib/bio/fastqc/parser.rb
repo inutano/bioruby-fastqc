@@ -193,7 +193,10 @@ module Bio
 
       def sequence_duplication_levels
         node = @object.select{|a| a.first.first == ">>Sequence Duplication Levels" }.first
-        node.select{|n| n.first != ">>Sequence Duplication Levels" && n.first != "\#Total Duplicate Percentage" } if node
+        if node
+          node.shift(3)
+          node
+        end
       end
 
       def total_duplicate_percentage
