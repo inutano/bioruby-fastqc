@@ -98,7 +98,9 @@ module Bio
       end
 
       def fastqc_version
-        {}
+        {
+          "fastqcVersion" => @fastqc_object[:fastqc_version],
+        }
       end
 
       def filename
@@ -694,6 +696,7 @@ module Bio
 
       def sos_data_properties_string
         [
+          "fastqcVersion",
           "filename",
           "fileType",
           "encoding",
