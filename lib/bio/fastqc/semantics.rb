@@ -11,6 +11,10 @@ module Bio
         @fastqc_object = fastqc_object
       end
 
+      def rdf_version
+        "0.1.0"
+      end
+
       def turtle
         turtle_graph.dump(:ttl, prefixes: turtle_prefixes)
       end
@@ -23,6 +27,9 @@ module Bio
         {
           "uo" => "http://purl.obolibrary.org/obo/",
           "rdf" => "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+          "dcterms" => "http://purl.org/dc/terms/",
+          "pav" => "http://purl.org/pav/",
+          "foaf" => "http://xmlns.com/foaf/0.1/",
         }
       end
 
@@ -36,18 +43,26 @@ module Bio
         "http://purl.jp/bio/01/quanto"
       end
 
-      def identifier
-        if @id
-          @id
-        else
-          uri_base + "/resource/QNT" + @fastqc_object[:filename].split(".").first
-        end
+      def identifier_literal
+        @id ? @id : "QNT" + @fastqc_object[:filename].split(".")[0]
+      end
+
+      def identifier_uri
+        uri_base + "/resource/" + identifier_literal
       end
 
       def object_core
         {
           "@context" => jsonld_context,
-          "@id" => identifier,
+          "@id" => identifier_uri,
+          "@type" => "SequenceStatisticsReport",
+          "dcterms:identifier" => identifier_literal,
+          "dcterms:contributor" => ["Tazro Ohta", "Shuichi Kawashima"],
+          "dcterms:created" => Time.now.strftime("%Y-%m-%d"),
+          "dcterms:license" => "http://creativecommons.org/licenses/by-sa/2.1/jp/deed.en",
+          "dcterms:publisher" => "http://dbcls.rois.ac.jp/",
+          "pav:version" => rdf_version,
+          "foaf:page" => "http://quanto.dbcls.jp",
         }
       end
 
@@ -563,7 +578,7 @@ module Bio
 
       def jsonld_context
         # definition of imported terms in @context
-        object = imported_keywords
+        object = turtle_prefixes
 
         # definition of local ontology terms
         domain = uri_base + "/ontology/sos#"
@@ -601,13 +616,6 @@ module Bio
         end
 
         object
-      end
-
-      def imported_keywords
-        {
-          "uo" => "http://purl.obolibrary.org/obo/",
-          "rdf" => "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-        }
       end
 
       #
