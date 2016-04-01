@@ -14,6 +14,7 @@ describe Bio::FastQC do
       describe '#read' do
         it 'returns parsed data from zipfile' do
           expect(@data).not_to be_empty
+          expect(@data).not_to be_nil
         end
       end
     end
@@ -25,55 +26,73 @@ describe Bio::FastQC do
       end
 
       describe '#fastqc_version' do
-        it 'returns fastqc version as String and not empty' do
+        it 'returns fastqc version as String' do
           expect(@parser.fastqc_version).to be_instance_of(String)
           expect(@parser.fastqc_version).not_to be_empty
+          expect(@parser.fastqc_version).not_to be_nil
         end
       end
 
       describe '#filename' do
-        it 'returns filename as String and not empty' do
+        it 'returns filename as String' do
           expect(@parser.filename).to be_instance_of(String)
           expect(@parser.filename).not_to be_empty
+          expect(@parser.filename).not_to be_nil
         end
       end
 
       describe '#file_type' do
-        it 'returns file type as String and not empty' do
+        it 'returns file type as String' do
           expect(@parser.file_type).to be_instance_of(String)
           expect(@parser.file_type).not_to be_empty
+          expect(@parser.file_type).not_to be_nil
         end
       end
 
       describe '#encoding' do
-        it 'returns encoding type as String and not empty' do
+        it 'returns encoding type as String' do
           expect(@parser.encoding).to be_instance_of(String)
           expect(@parser.encoding).not_to be_empty
+          expect(@parser.encoding).not_to be_nil
         end
       end
 
       describe '#total_sequences' do
         it 'returns total number of sequences as Fixnum' do
           expect(@parser.total_sequences).to be_instance_of(Fixnum)
+          expect(@parser.total_sequences).to be > 0
+          expect(@parser.total_sequences).not_to be_nil
         end
       end
 
       describe '#filtered_sequences' do
-        it 'returns number of filtered sequence as Fixnum and not empty' do
-          expect(@parser.filtered_sequences).to be_instance_of(Fixnum)
+        it 'returns number of filtered sequence as Fixnum, can be nil' do
+          if @parser.filtered_sequences
+            expect(@parser.filtered_sequences).to be_instance_of(Fixnum)
+          end
+        end
+      end
+
+      describe '#sequences_flagged_as_poor_quality' do
+        it 'returns number of sequences flagged as poor quality as Fixnum, can be nil' do
+          if @parser.sequences_flagged_as_poor_quality
+            expect(@parser.sequences_flagged_as_poor_quality).to be_instance_of(Fixnum)
+          end
         end
       end
 
       describe '#sequence_length' do
-        it 'returns length of sequence as String and not empty' do
+        it 'returns length of sequence as String' do
           expect(@parser.sequence_length).to be_instance_of(String)
           expect(@parser.sequence_length).not_to be_empty
+          expect(@parser.sequence_length).not_to be_nil
         end
       end
 
       describe '#percent_gc' do
-        it 'returns percentage of GC content as Float and not empty' do
+        it 'returns percentage of GC content as Float' do
           expect(@parser.percent_gc).to be_instance_of(Float)
+          expect(@parser.percent_gc).not_to be_nil
         end
       end
 
@@ -189,6 +208,7 @@ describe Bio::FastQC do
       describe '#total_duplicate_percentage' do
         it 'returns duplicate percentage as Float and not empty' do
           expect(@parser.total_duplicate_percentage).to be_instance_of(Float)
+          expect(@parser.total_duplicate_percentage).not_to be_nil
         end
       end
 
@@ -255,42 +275,51 @@ describe Bio::FastQC do
       describe '#min_length' do
         it 'returns minimum read length as Fixnum and not empty' do
           expect(@parser.min_length).to be_instance_of(Fixnum)
+          expect(@parser.min_length).to be > 0
+          expect(@parser.min_length).not_to be_nil
         end
       end
 
       describe '#max_length' do
         it 'returns maximum read length as Fixnum and not empty' do
           expect(@parser.max_length).to be_instance_of(Fixnum)
+          expect(@parser.max_length).to be > 0
+          expect(@parser.max_length).not_to be_nil
         end
       end
 
       describe '#overall_mean_quality_score' do
         it 'returns overall mean quality score as Float and not empty' do
           expect(@parser.overall_mean_quality_score).to be_instance_of(Float)
+          expect(@parser.overall_mean_quality_score).not_to be_nil
         end
       end
 
       describe '#overall_median_quality_score' do
         it 'returns overall median quality score as Float and not empty' do
           expect(@parser.overall_median_quality_score).to be_instance_of(Float)
+          expect(@parser.overall_median_quality_score).not_to be_nil
         end
       end
 
       describe '#overall_n_content' do
         it 'returns overall N content as Float and not empty' do
           expect(@parser.overall_n_content).to be_instance_of(Float)
+          expect(@parser.overall_n_content).not_to be_nil
         end
       end
 
       describe '#mean_sequence_length' do
         it 'returns mean sequence length from read length distribution as Float and not empty' do
           expect(@parser.mean_sequence_length).to be_instance_of(Float)
+          expect(@parser.mean_sequence_length).not_to be_nil
         end
       end
 
       describe '#median_sequence_length' do
         it 'returns median sequence length from read length distribution as Float and not empty' do
           expect(@parser.median_sequence_length).to be_instance_of(Float)
+          expect(@parser.median_sequence_length).not_to be_nil
         end
       end
     end
