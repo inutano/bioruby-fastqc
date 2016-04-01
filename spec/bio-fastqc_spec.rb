@@ -28,7 +28,13 @@ describe Bio::FastQC do
       describe '#fastqc_version' do
         it 'returns fastqc version as String' do
           expect(@parser.fastqc_version).to be_instance_of(String)
+        end
+
+        it 'does not return empty string' do
           expect(@parser.fastqc_version).not_to be_empty
+        end
+
+        it 'does not return nil' do
           expect(@parser.fastqc_version).not_to be_nil
         end
       end
@@ -36,7 +42,13 @@ describe Bio::FastQC do
       describe '#filename' do
         it 'returns filename as String' do
           expect(@parser.filename).to be_instance_of(String)
+        end
+
+        it 'does not return empty string' do
           expect(@parser.filename).not_to be_empty
+        end
+
+        it 'does not return nil' do
           expect(@parser.filename).not_to be_nil
         end
       end
@@ -44,7 +56,13 @@ describe Bio::FastQC do
       describe '#file_type' do
         it 'returns file type as String' do
           expect(@parser.file_type).to be_instance_of(String)
+        end
+
+        it 'does not return empty string' do
           expect(@parser.file_type).not_to be_empty
+        end
+
+        it 'does not return nil' do
           expect(@parser.file_type).not_to be_nil
         end
       end
@@ -52,7 +70,13 @@ describe Bio::FastQC do
       describe '#encoding' do
         it 'returns encoding type as String' do
           expect(@parser.encoding).to be_instance_of(String)
+        end
+
+        it 'does not return empty string' do
           expect(@parser.encoding).not_to be_empty
+        end
+
+        it 'does not return nil' do
           expect(@parser.encoding).not_to be_nil
         end
       end
@@ -60,7 +84,13 @@ describe Bio::FastQC do
       describe '#total_sequences' do
         it 'returns total number of sequences as Fixnum' do
           expect(@parser.total_sequences).to be_instance_of(Fixnum)
+        end
+
+        it 'returns integer larger than zero' do
           expect(@parser.total_sequences).to be > 0
+        end
+
+        it 'does not return nil' do
           expect(@parser.total_sequences).not_to be_nil
         end
       end
@@ -84,7 +114,13 @@ describe Bio::FastQC do
       describe '#sequence_length' do
         it 'returns length of sequence as String' do
           expect(@parser.sequence_length).to be_instance_of(String)
+        end
+
+        it 'does not return empty string' do
           expect(@parser.sequence_length).not_to be_empty
+        end
+
+        it 'does not return nil' do
           expect(@parser.sequence_length).not_to be_nil
         end
       end
@@ -92,6 +128,9 @@ describe Bio::FastQC do
       describe '#percent_gc' do
         it 'returns percentage of GC content as Float' do
           expect(@parser.percent_gc).to be_instance_of(Float)
+        end
+
+        it 'does not return nil' do
           expect(@parser.percent_gc).not_to be_nil
         end
       end
@@ -208,6 +247,9 @@ describe Bio::FastQC do
       describe '#total_duplicate_percentage' do
         it 'returns duplicate percentage as Float and not empty' do
           expect(@parser.total_duplicate_percentage).to be_instance_of(Float)
+        end
+
+        it 'does not returns nil' do
           expect(@parser.total_duplicate_percentage).not_to be_nil
         end
       end
@@ -275,7 +317,13 @@ describe Bio::FastQC do
       describe '#min_length' do
         it 'returns minimum read length as Fixnum and not empty' do
           expect(@parser.min_length).to be_instance_of(Fixnum)
+        end
+
+        it 'returns integer larger than zero' do
           expect(@parser.min_length).to be > 0
+        end
+
+        it 'does not return nil' do
           expect(@parser.min_length).not_to be_nil
         end
       end
@@ -283,7 +331,13 @@ describe Bio::FastQC do
       describe '#max_length' do
         it 'returns maximum read length as Fixnum and not empty' do
           expect(@parser.max_length).to be_instance_of(Fixnum)
+        end
+
+        it 'returns integer larger than zero' do
           expect(@parser.max_length).to be > 0
+        end
+
+        it 'does not return nil' do
           expect(@parser.max_length).not_to be_nil
         end
       end
@@ -291,6 +345,9 @@ describe Bio::FastQC do
       describe '#overall_mean_quality_score' do
         it 'returns overall mean quality score as Float and not empty' do
           expect(@parser.overall_mean_quality_score).to be_instance_of(Float)
+        end
+
+        it 'does not return nil' do
           expect(@parser.overall_mean_quality_score).not_to be_nil
         end
       end
@@ -298,6 +355,9 @@ describe Bio::FastQC do
       describe '#overall_median_quality_score' do
         it 'returns overall median quality score as Float and not empty' do
           expect(@parser.overall_median_quality_score).to be_instance_of(Float)
+        end
+
+        it 'does not return nil' do
           expect(@parser.overall_median_quality_score).not_to be_nil
         end
       end
@@ -305,6 +365,9 @@ describe Bio::FastQC do
       describe '#overall_n_content' do
         it 'returns overall N content as Float and not empty' do
           expect(@parser.overall_n_content).to be_instance_of(Float)
+        end
+
+        it 'does not return nil' do
           expect(@parser.overall_n_content).not_to be_nil
         end
       end
@@ -312,6 +375,9 @@ describe Bio::FastQC do
       describe '#mean_sequence_length' do
         it 'returns mean sequence length from read length distribution as Float and not empty' do
           expect(@parser.mean_sequence_length).to be_instance_of(Float)
+        end
+
+        it 'does not return nil' do
           expect(@parser.mean_sequence_length).not_to be_nil
         end
       end
@@ -319,6 +385,9 @@ describe Bio::FastQC do
       describe '#median_sequence_length' do
         it 'returns median sequence length from read length distribution as Float and not empty' do
           expect(@parser.median_sequence_length).to be_instance_of(Float)
+        end
+
+        it 'does not return nil' do
           expect(@parser.median_sequence_length).not_to be_nil
         end
       end
