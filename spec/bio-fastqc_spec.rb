@@ -72,8 +72,8 @@ describe Bio::FastQC do
       end
 
       describe '#percent_gc' do
-        it 'returns percentage of GC content as Fixnum and not empty' do
-          expect(@parser.percent_gc).to be_instance_of(Fixnum)
+        it 'returns percentage of GC content as Float and not empty' do
+          expect(@parser.percent_gc).to be_instance_of(Float)
         end
       end
 
