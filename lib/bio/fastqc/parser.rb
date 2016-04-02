@@ -170,7 +170,7 @@ module Bio
             c  = length_count[1].to_f
             ((l.sub(/-\d+$/,"").to_f + l.sub(/^\d+-/,"").to_f) / 2) * c
           end
-          sum.reduce(:+) / sum.size
+          sum.reduce(:+) / dist.map{|l_c| l_c[1].to_f }.reduce(:+)
         end
       end
 
