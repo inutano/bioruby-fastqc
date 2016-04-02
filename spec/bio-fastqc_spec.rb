@@ -391,6 +391,16 @@ describe Bio::FastQC do
           expect(@parser.median_sequence_length).not_to be_nil
         end
       end
+
+      describe '#parse' do
+        it 'does not return nil' do
+          expect(@parser.parse).not_to be_nil
+        end
+
+        it 'returns hash' do
+          expect(@parser.parse).to be_instance_of(Hash)
+        end
+      end
     end
   end
 end
