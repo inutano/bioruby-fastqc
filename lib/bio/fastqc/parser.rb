@@ -64,7 +64,7 @@ module Bio
       #
 
       def get_module_matrix(module_name, num_of_header_rows)
-        mod = @module_results.select{|m| m[0][0] == ">>#{module_name}" }[0]
+        mod = @module_results.select{|m| m[0][0] == ">>#{module_name}" }[0].dup
         if mod
           mod.shift(num_of_header_rows)
           mod
@@ -141,7 +141,7 @@ module Bio
       end
 
       def overall_quality_score(mean_or_median)
-        per_base = per_base_sequence_quality
+        per_base = per_base_sequence_quality.dup
         per_base.shift # drop header
         column = per_base_quality_column(mean_or_median)
         v = per_base.map do |row|
@@ -165,7 +165,7 @@ module Bio
       end
 
       def mean_sequence_length
-        dist = sequence_length_distribution
+        dist = sequence_length_distribution.dup
         dist.shift # drop column header
         if dist.size == 1
           dist[0][0].to_f
@@ -184,7 +184,7 @@ module Bio
       end
 
       def median_sequence_length
-        dist = sequence_length_distribution
+        dist = sequence_length_distribution.dup
         dist.shift # drop column header
         if dist.size == 1
           dist[0][0].to_f
