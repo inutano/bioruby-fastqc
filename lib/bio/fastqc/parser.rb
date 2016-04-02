@@ -180,8 +180,9 @@ module Bio
           dist[0][0].to_f
         else
           k = dist.map{|l_c| l_c[1].to_f }.reduce(:+) / 2 # position of median
+          median = 0
           dist.each do |l_c|
-            c = l_c[1] # count of reads in this length range
+            c = l_c[1].to_f # count of reads in this length range
             if k > c
               k -= c
             else
