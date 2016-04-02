@@ -168,11 +168,7 @@ module Bio
           sum = dist.map do |length_count|
             l = length_count[0]
             c  = length_count[1].to_f
-            if l =~ /\d-\d/
-              ((l.sub(/-\d+$/,"").to_f + l.sub(/^\d+-/,"").to_f) / 2 ) * c
-            else
-              l.to_i * c
-            end
+            ((l.sub(/-\d+$/,"").to_f + l.sub(/^\d+-/,"").to_f) / 2) * c
           end
           sum.reduce(:+) / sum.size
         end
@@ -183,29 +179,18 @@ module Bio
         if dist.size == 1
           dist[0][0].to_f
         else
-          array = dist.map do |length_count|
-            l = length_count[0]
-            c = length_count[1].to_f
-            c.times.map{ l }
+          k = dist.map{|l_c| l_c[1].to_f }.reduce(:+) / 2 # position of median
+          dist.each do |l_c|
+            c = l_c[1] # count of reads in this length range
+            if k > c
+              k -= c
+            else
+              l = l_c[0]
+              median = ((l.sub(/-\d+$/,"").to_f + l.sub(/^\d+-/,"").to_f) / 2)
+              break
+            end
           end
-          median(array.flatten)
-        end
-      end
-
-      def median(array)
-        a = array.dup
-        k = array.size / 2
-        loop do
-          pivot = a.delete_at(rand(a.size))
-          left, right = a.partition{|x| x < pivot }
-          if k == left.length
-            return pivot
-          elsif k < left.length
-            a = left
-          else
-            k = k - left.length - 1
-            a = right
-          end
+          median
         end
       end
 
