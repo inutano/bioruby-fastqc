@@ -6,8 +6,9 @@ require 'rdf/turtle'
 module Bio
   module FastQC
     class Semantics
-      def initialize(fastqc_object, id: nil)
+      def initialize(fastqc_object, id: nil, tiny: true)
         @id = id
+        @tiny = tiny
         @fastqc_object = fastqc_object
       end
 
@@ -35,7 +36,9 @@ module Bio
 
       def json_ld_object
         object = [object_core, static_value_modules].flatten.inject(&:merge)
-        object["hasMatrix"] = matrix_modules
+        if !@tiny
+          object["hasMatrix"] = matrix_modules
+        end
         object
       end
 
