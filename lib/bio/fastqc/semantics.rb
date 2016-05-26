@@ -142,7 +142,7 @@ module Bio
       def total_sequences
         {
           "totalSequences" => {
-            "@type" => "SequenceReadContent",
+            "@type" => "SequenceReadAmount",
             "hasUnit" => "uo:CountUnit",
             "rdf:value" => @fastqc_object[:total_sequences],
           }
@@ -152,7 +152,7 @@ module Bio
       def filtered_sequences
         {
           "filteredSequences" => {
-            "@type" => "SequenceReadContent",
+            "@type" => "SequenceReadAmount",
             "hasUnit" => "uo:CountUnit",
             "rdf:value" => @fastqc_object[:filtered_sequences],
           }
@@ -172,7 +172,7 @@ module Bio
       def percent_gc
         {
           "percentGC" => {
-            "@type" => "NucleotideBaseContent",
+            "@type" => "SequenceBaseAmount",
             "hasUnit" => "uo:CountUnit",
             "rdf:value" => @fastqc_object[:percent_gc],
           }
@@ -261,7 +261,7 @@ module Bio
               "rdf:value" => quality,
             },
             "sequenceReadCount" => {
-              "@type" => "SequenceReadContent",
+              "@type" => "SequenceReadAmount",
               "hasUnit" => "uo:CountUnit",
               "rdf:value" => count,
             },
@@ -291,22 +291,22 @@ module Bio
             "rowIndex" => i,
             "basePosition" => base,
             "percentGuanine" => {
-              "@type" => "NucleotideBaseContent",
+              "@type" => "SequenceBaseAmount",
               "hasUnit" => "uo:Percentage",
               "rdf:value" => guanine,
             },
             "percentAdenine" => {
-              "@type" => "NucleotideBaseContent",
+              "@type" => "SequenceBaseAmount",
               "hasUnit" => "uo:Percentage",
               "rdf:value" => adenine,
             },
             "percentThymine" => {
-              "@type" => "NucleotideBaseContent",
+              "@type" => "SequenceBaseAmount",
               "hasUnit" => "uo:Percentage",
               "rdf:value" => thymine,
             },
             "percentCytosine" => {
-              "@type" => "NucleotideBaseContent",
+              "@type" => "SequenceBaseAmount",
               "hasUnit" => "uo:Percentage",
               "rdf:value" => chytosine,
             },
@@ -329,12 +329,12 @@ module Bio
             "@type" => "Row",
             "rowIndex" => i,
             "percentGC" => {
-              "@type" => "NucleotideBaseContent",
+              "@type" => "SequenceBaseAmount",
               "hasunit" => "uo:Percent",
               "rdf:value" => gc_content,
             },
             "sequenceReadCount" => {
-              "@type" => "SequenceReadContent",
+              "@type" => "SequenceReadAmount",
               "hasUnit" => "uo:CountUnit",
               "rdf:value" => count,
             },
@@ -361,7 +361,7 @@ module Bio
             "rowIndex" => i,
             "basePosition" => base,
             "nCount" => {
-              "@type" => "NContent",
+              "@type" => "SequenceBaseAmount",
               "hasUnit" => "uo:Percentage",
               "rdf:value" => n_count,
             },
@@ -390,7 +390,7 @@ module Bio
               "rdf:value" => length,
             },
             "sequenceReadCount" => {
-              "@type" => "SequenceReadContent",
+              "@type" => "SequenceReadAmount",
               "hasUnit" => "uo:CountUnit",
               "rdf:value" => count,
             },
@@ -423,7 +423,7 @@ module Bio
               "rdf:value" => duplication_level,
             },
             "sequenceReadRelativeCount" => {
-              "@type" => "SequenceReadContent",
+              "@type" => "SequenceReadAmount",
               "hasUnit" => "uo:CountUnit",
               "rdf:value" => relative_count,
             },
@@ -449,12 +449,12 @@ module Bio
             "rowIndex" => i,
             "overrepresentedSequence" => sequence,
             "sequenceReadCount" => {
-              "@type" => "SequenceReadContent",
+              "@type" => "SequenceReadAmount",
               "hasUnit" => "uo:CountUnit",
               "rdf:value" => count,
             },
             "sequenceReadPercentage" => {
-              "@type" => "SequenceReadContent",
+              "@type" => "SequenceReadAmount",
               "hasUnit" => "uo:Percentage",
               "rdf:value" => percentage,
             },
@@ -486,17 +486,17 @@ module Bio
             "rowIndex" => i,
             "kmerSequence" => sequence,
             "sequenceReadCount" => {
-              "@type" => "SequenceReadContent",
+              "@type" => "SequenceReadAmount",
               "hasUnit" => "uo:CountUnit",
               "rdf:value" => count,
             },
             "observedPerExpectedOverall" => {
-              "@type" => "SequenceReadContent",
+              "@type" => "SequenceReadAmount",
               "hasUnit" => "uo:Ratio",
               "rdf:value" => ratio_overall,
             },
             "observedPerExpectedMax" => {
-              "@type" => "SequenceReadContent",
+              "@type" => "SequenceReadAmount",
               "hasUnit" => "uo:Ratio",
               "rdf:value" => ratio_max,
             },
@@ -568,7 +568,7 @@ module Bio
       def overall_n_content
         {
           "overallNContent" => {
-            "@type" => "NContent",
+            "@type" => "SequenceBaseAmount",
             "hasUnit" => "uo:Percentage",
             "rdf:value" => @fastqc_object[:overall_n_content],
           }
@@ -661,8 +661,8 @@ module Bio
       def sos_class_for_values
         [
           "PhredQualityScore",
-          "NucleotideBaseContent",
-          "SequenceReadContent",
+          "SequenceBaseAmount",
+          "SequenceReadAmount",
           "SequenceReadLength",
           "SequenceDuplicationLevel",
         ]
