@@ -78,7 +78,7 @@ module Bio
           encoding,
           total_sequences,
           filtered_sequences,
-          sequence_length,
+          #sequence_length,
           percent_gc,
           total_duplicate_percentage,
           min_length,
