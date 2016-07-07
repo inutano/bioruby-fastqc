@@ -13,7 +13,7 @@ module Bio
       end
 
       def rdf_version
-        "0.1.0"
+        "0.1.1"
       end
 
       def turtle
@@ -31,6 +31,7 @@ module Bio
           "dcterms" => "http://purl.org/dc/terms/",
           "pav" => "http://purl.org/pav/",
           "foaf" => "http://xmlns.com/foaf/0.1/",
+          "sos" => "http://purl.jp/bio/01/quanto/ontology/sos#",
         }
       end
 
@@ -584,37 +585,37 @@ module Bio
         object = turtle_prefixes
 
         # definition of local ontology terms
-        domain = uri_base + "/ontology/sos#"
+        pfx = "sos:"
 
         # definition of class in @context
         sos_class.each do |term|
           object[term] = {}
-          object[term]["@id"] = domain + term
+          object[term]["@id"] = pfx + term
           object[term]["@type"] = "@id"
         end
 
         # definition of object properties in @context
         sos_object_properties.each do |term|
           object[term] = {}
-          object[term]["@id"] = domain + term
+          object[term]["@id"] = pfx + term
           object[term]["@type"] = "@id"
         end
 
         sos_data_properties_string.each do |term|
           object[term] = {}
-          object[term]["@id"] = domain + term
+          object[term]["@id"] = pfx + term
           object[term]["@type"] = "http://www.w3.org/2001/XMLSchema#string"
         end
 
         sos_data_properties_integer.each do |term|
           object[term] = {}
-          object[term]["@id"] = domain + term
+          object[term]["@id"] = pfx + term
           object[term]["@type"] = "http://www.w3.org/2001/XMLSchema#integer"
         end
 
         sos_data_properties_float.each do |term|
           object[term] = {}
-          object[term]["@id"] = domain + term
+          object[term]["@id"] = pfx + term
           object[term]["@type"] = "http://www.w3.org/2001/XMLSchema#float"
         end
 
