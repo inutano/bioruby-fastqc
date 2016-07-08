@@ -13,7 +13,7 @@ module Bio
       end
 
       def rdf_version
-        "0.1.1"
+        "0.1.2"
       end
 
       def turtle
