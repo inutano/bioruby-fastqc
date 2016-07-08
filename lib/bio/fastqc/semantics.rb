@@ -32,6 +32,7 @@ module Bio
           "pav" => "http://purl.org/pav/",
           "foaf" => "http://xmlns.com/foaf/0.1/",
           "sos" => "http://purl.jp/bio/01/quanto/ontology/sos#",
+          "quanto" => "http://purl.jp/bio/01/quanto/resource/",
         }
       end
 
@@ -52,7 +53,7 @@ module Bio
       end
 
       def identifier_uri
-        uri_base + "/resource/" + identifier_literal
+        "quanto:" + identifier_literal
       end
 
       def object_core
@@ -63,10 +64,16 @@ module Bio
           "dcterms:identifier" => identifier_literal,
           "dcterms:contributor" => ["Tazro Ohta", "Shuichi Kawashima"],
           "dcterms:created" => Time.now.strftime("%Y-%m-%d"),
-          "dcterms:license" => "http://creativecommons.org/licenses/by-sa/2.1/jp/deed.en",
-          "dcterms:publisher" => "http://dbcls.rois.ac.jp/",
+          "dcterms:license" => {
+            "@id" => "http://creativecommons.org/licenses/by-sa/2.1/jp/deed.en",
+          },
+          "dcterms:publisher" => {
+            "@id" => "http://dbcls.rois.ac.jp/",
+          },
           "pav:version" => rdf_version,
-          "foaf:page" => "http://quanto.dbcls.jp",
+          "foaf:page" => {
+            "@id" => "http://quanto.dbcls.jp",
+          },
         }
       end
 
