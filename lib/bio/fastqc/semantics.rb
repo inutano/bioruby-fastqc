@@ -65,7 +65,7 @@ module Bio
           "dcterms:contributor" => ["Tazro Ohta", "Shuichi Kawashima"],
           "dcterms:created" => Time.now.strftime("%Y-%m-%d"),
           "dcterms:license" => {
-            "@id" => "http://creativecommons.org/licenses/by-sa/2.1/jp/deed.en",
+            "@id" => "http://creativecommons.org/licenses/by-sa/4.0/",
           },
           "dcterms:publisher" => {
             "@id" => "http://dbcls.rois.ac.jp/",
