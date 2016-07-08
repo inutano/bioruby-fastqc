@@ -50,11 +50,11 @@ module Bio
       end
 
       def sra_identifier
-        @fastqc_object[:filename].split(".")[0]
+        @fastqc_object[:filename].split(".")[0].split("_")[0]
       end
 
       def identifier_literal
-        @id ? @id : "QNT" + sra_identifier
+        @id ? @id : "QNT" + @fastqc_object[:filename].split(".")[0]
       end
 
       def identifier_uri
