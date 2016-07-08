@@ -28,6 +28,7 @@ module Bio
         {
           "uo" => "http://purl.obolibrary.org/obo/",
           "rdf" => "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+          "rdfs" => "http://www.w3.org/2000/01/rdf-schema#",
           "dcterms" => "http://purl.org/dc/terms/",
           "pav" => "http://purl.org/pav/",
           "foaf" => "http://xmlns.com/foaf/0.1/",
@@ -73,6 +74,9 @@ module Bio
           "pav:version" => rdf_version,
           "foaf:page" => {
             "@id" => "http://quanto.dbcls.jp",
+          },
+          "rdfs:seeAlso" => {
+            "@id" => "http://identifiers.org/insdc.sra/" + @id,
           },
         }
       end
