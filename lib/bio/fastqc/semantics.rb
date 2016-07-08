@@ -49,8 +49,12 @@ module Bio
         "http://purl.jp/bio/01/quanto"
       end
 
+      def sra_identifier
+        @fastqc_object[:filename].split(".")[0]
+      end
+
       def identifier_literal
-        @id ? @id : "QNT" + @fastqc_object[:filename].split(".")[0]
+        @id ? @id : "QNT" + sra_identifier
       end
 
       def identifier_uri
@@ -76,7 +80,7 @@ module Bio
             "@id" => "http://quanto.dbcls.jp",
           },
           "rdfs:seeAlso" => {
-            "@id" => "http://identifiers.org/insdc.sra/" + @id,
+            "@id" => "http://identifiers.org/insdc.sra/" + sra_identifier,
           },
         }
       end
