@@ -16,7 +16,9 @@ module Bio
 
   			def read_zipfile(file)
   				Zip::File.open(file) do |zipfile|
-  					zipfile.glob('*/fastqc_data.txt').first.get_input_stream.read
+  					d = zipfile.glob('*/fastqc_data.txt').first
+            filenotfound(file) if !d
+            d.get_input_stream.read
   				end
   			end
 
@@ -27,10 +29,12 @@ module Bio
   			def read_dir(file)
   				open(File.join(file, "fastqc_data.txt")).read
   			rescue Errno::ENOENT
-          STDERR.puts "FastQC data file fastqc_data.txt not found"
-          STDERR.puts "Input file: #{file}"
-          raise Errno::ENOENT
+          filenotfound(file)
   			end
+
+        def filenotfound(file)
+          raise "FastQC data file fastqc_data.txt not found, input file: #{file}"
+        end
   		end
   	end
   end
