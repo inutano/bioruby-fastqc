@@ -27,8 +27,9 @@ module Bio
   			def read_dir(file)
   				open(File.join(file, "fastqc_data.txt")).read
   			rescue Errno::ENOENT
-  				puts "FastQC data file fastqc_data.txt not found"
-  				exit
+          STDERR.puts "FastQC data file fastqc_data.txt not found"
+          STDERR.puts "Input file: #{file}"
+          raise Errno::ENOENT
   			end
   		end
   	end
