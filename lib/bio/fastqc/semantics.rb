@@ -34,6 +34,7 @@ module Bio
           "foaf" => "http://xmlns.com/foaf/0.1/",
           "sos" => "http://purl.jp/bio/01/quanto/ontology/sos#",
           "quanto" => "http://purl.jp/bio/01/quanto/resource/",
+          "sio" => "http://semanticscience.org/resource/",
         }
       end
 
@@ -157,40 +158,40 @@ module Bio
 
       def total_sequences
         {
-          "totalSequences" => {
-            "@type" => "SequenceReadAmount",
-            "hasUnit" => "obo:UO_0000244",
-            "rdf:value" => @fastqc_object[:total_sequences],
+          "sio:SIO_000216" => {
+            "@type" => "totalSequences",
+            "sio:SIO_000221" => "obo:UO_0000244",
+            "sio:SIO_000300" => @fastqc_object[:total_sequences],
           }
         }
       end
 
       def filtered_sequences
         {
-          "filteredSequences" => {
-            "@type" => "SequenceReadAmount",
-            "hasUnit" => "obo:UO_0000244",
-            "rdf:value" => @fastqc_object[:filtered_sequences],
+          "sio:SIO_000216" => {
+            "@type" => "filteredSequences",
+            "sio:SIO_000221" => "obo:UO_0000244",
+            "sio:SIO_000300" => @fastqc_object[:filtered_sequences],
           }
         }
       end
 
       def sequence_length
         {
-          "sequenceLength" => {
+          "sio:SIO_000216" => {
             "@type" => "SequenceReadLength",
-            "hasUnit" => "obo:UO_0000244",
-            "rdf:value" => @fastqc_object[:sequence_length],
+            "sio:SIO_000221" => "obo:UO_0000244",
+            "sio:SIO_000300" => @fastqc_object[:sequence_length],
           }
         }
       end
 
       def percent_gc
         {
-          "percentGC" => {
-            "@type" => "BaseRatio",
-            "hasUnit" => "obo:UO_0000187",
-            "rdf:value" => @fastqc_object[:percent_gc],
+          "sio:SIO_000216" => {
+            "@type" => "percentGC",
+            "sio:SIO_000221" => "obo:UO_0000187",
+            "sio:SIO_000300" => @fastqc_object[:percent_gc],
           }
         }
       end
@@ -221,33 +222,33 @@ module Bio
             "basePosition" => base,
             "meanBaseCallQuality" => {
               "@type" => "PhredQualityScore",
-              "hasUnit" => "obo:UO_0000189",
-              "rdf:value" => mean,
+              "sio:SIO_000221" => "obo:UO_0000189",
+              "sio:SIO_000300" => mean,
             },
             "medianBaseCallQuality" => {
               "@type" => "PhredQualityScore",
-              "hasUnit" => "obo:UO_0000189",
-              "rdf:value" => median,
+              "sio:SIO_000221" => "obo:UO_0000189",
+              "sio:SIO_000300" => median,
             },
             "baseCallQualityLowerQuartile" => {
               "@type" => "PhredQualityScore",
-              "hasUnit" => "obo:UO_0000189",
-              "rdf:value" => lower_quartile,
+              "sio:SIO_000221" => "obo:UO_0000189",
+              "sio:SIO_000300" => lower_quartile,
             },
             "baseCallQualityUpperQuartile" => {
               "@type" => "PhredQualityScore",
-              "hasUnit" => "obo:UO_0000189",
-              "rdf:value" => upper_quartile,
+              "sio:SIO_000221" => "obo:UO_0000189",
+              "sio:SIO_000300" => upper_quartile,
             },
             "baseCallQuality10thPercentile" => {
               "@type" => "PhredQualityScore",
-              "hasUnit" => "obo:UO_0000189",
-              "rdf:value" => tenth_percentile,
+              "sio:SIO_000221" => "obo:UO_0000189",
+              "sio:SIO_000300" => tenth_percentile,
             },
             "baseCallQuality90thPercentile" => {
               "@type" => "PhredQualityScore",
-              "hasUnit" => "obo:UO_0000189",
-              "rdf:value" => ninetieth_percentile,
+              "sio:SIO_000221" => "obo:UO_0000189",
+              "sio:SIO_000300" => ninetieth_percentile,
             },
           }
         end
@@ -273,13 +274,13 @@ module Bio
             "rowIndex" => i,
             "baseCallQuality" => {
               "@type" => "PhredQualityScore",
-              "hasUnit" => "obo:UO_0000189",
-              "rdf:value" => quality,
+              "sio:SIO_000221" => "obo:UO_0000189",
+              "sio:SIO_000300" => quality,
             },
             "sequenceReadCount" => {
               "@type" => "SequenceReadAmount",
-              "hasUnit" => "obo:UO_0000244",
-              "rdf:value" => count,
+              "sio:SIO_000221" => "obo:UO_0000244",
+              "sio:SIO_000300" => count,
             },
           }
         end
@@ -308,23 +309,23 @@ module Bio
             "basePosition" => base,
             "percentGuanine" => {
               "@type" => "BaseRatio",
-              "hasUnit" => "obo:UO_0000187",
-              "rdf:value" => guanine,
+              "sio:SIO_000221" => "obo:UO_0000187",
+              "sio:SIO_000300" => guanine,
             },
             "percentAdenine" => {
               "@type" => "BaseRatio",
-              "hasUnit" => "obo:UO_0000187",
-              "rdf:value" => adenine,
+              "sio:SIO_000221" => "obo:UO_0000187",
+              "sio:SIO_000300" => adenine,
             },
             "percentThymine" => {
               "@type" => "BaseRatio",
-              "hasUnit" => "obo:UO_0000187",
-              "rdf:value" => thymine,
+              "sio:SIO_000221" => "obo:UO_0000187",
+              "sio:SIO_000300" => thymine,
             },
             "percentCytosine" => {
               "@type" => "BaseRatio",
-              "hasUnit" => "obo:UO_0000187",
-              "rdf:value" => chytosine,
+              "sio:SIO_000221" => "obo:UO_0000187",
+              "sio:SIO_000300" => chytosine,
             },
           }
         end
@@ -346,13 +347,13 @@ module Bio
             "rowIndex" => i,
             "percentGC" => {
               "@type" => "BaseRatio",
-              "hasunit" => "obo:UO_0000187",
-              "rdf:value" => gc_content,
+              "sio:SIO_000221" => "obo:UO_0000187",
+              "sio:SIO_000300" => gc_content,
             },
             "sequenceReadCount" => {
               "@type" => "SequenceReadAmount",
-              "hasUnit" => "obo:UO_0000244",
-              "rdf:value" => count,
+              "sio:SIO_000221" => "obo:UO_0000244",
+              "sio:SIO_000300" => count,
             },
           }
         end
@@ -378,8 +379,8 @@ module Bio
             "basePosition" => base,
             "nCount" => {
               "@type" => "BaseRatio",
-              "hasUnit" => "obo:UO_0000187",
-              "rdf:value" => n_count,
+              "sio:SIO_000221" => "obo:UO_0000187",
+              "sio:SIO_000300" => n_count,
             },
           }
         end
@@ -402,13 +403,13 @@ module Bio
 
             "sequenceReadLength" => {
               "@type" => "SequenceReadLength",
-              "hasUnit" => "obo:UO_0000244",
-              "rdf:value" => length,
+              "sio:SIO_000221" => "obo:UO_0000244",
+              "sio:SIO_000300" => length,
             },
             "sequenceReadCount" => {
               "@type" => "SequenceReadAmount",
-              "hasUnit" => "obo:UO_0000244",
-              "rdf:value" => count,
+              "sio:SIO_000221" => "obo:UO_0000244",
+              "sio:SIO_000300" => count,
             },
           }
         end
@@ -435,13 +436,13 @@ module Bio
 
             "sequenceDuplicationLevel" => {
               "@type" => "SequenceDuplicationLevel",
-              "hasUnit" => "obo:UO_0000189",
-              "rdf:value" => duplication_level,
+              "sio:SIO_000221" => "obo:UO_0000189",
+              "sio:SIO_000300" => duplication_level,
             },
             "sequenceReadRelativeCount" => {
               "@type" => "SequenceReadAmount",
-              "hasUnit" => "obo:UO_0000244",
-              "rdf:value" => relative_count,
+              "sio:SIO_000221" => "obo:UO_0000244",
+              "sio:SIO_000300" => relative_count,
             },
           }
         end
@@ -466,13 +467,13 @@ module Bio
             "overrepresentedSequence" => sequence,
             "sequenceReadCount" => {
               "@type" => "SequenceReadAmount",
-              "hasUnit" => "obo:UO_0000244",
-              "rdf:value" => count,
+              "sio:SIO_000221" => "obo:UO_0000244",
+              "sio:SIO_000300" => count,
             },
             "sequenceReadPercentage" => {
               "@type" => "SequenceReadRatio",
-              "hasUnit" => "obo:UO_0000187",
-              "rdf:value" => percentage,
+              "sio:SIO_000221" => "obo:UO_0000187",
+              "sio:SIO_000300" => percentage,
             },
             "possibleSourceOfSequence" => possible_source,
           }
@@ -503,18 +504,18 @@ module Bio
             "kmerSequence" => sequence,
             "sequenceReadCount" => {
               "@type" => "SequenceReadAmount",
-              "hasUnit" => "obo:UO_0000244",
-              "rdf:value" => count,
+              "sio:SIO_000221" => "obo:UO_0000244",
+              "sio:SIO_000300" => count,
             },
             "observedPerExpectedOverall" => {
               "@type" => "SequenceReadAmount",
-              "hasUnit" => "obo:Ratio",
-              "rdf:value" => ratio_overall,
+              "sio:SIO_000221" => "obo:Ratio",
+              "sio:SIO_000300" => ratio_overall,
             },
             "observedPerExpectedMax" => {
               "@type" => "SequenceReadAmount",
-              "hasUnit" => "obo:Ratio",
-              "rdf:value" => ratio_max,
+              "sio:SIO_000221" => "obo:Ratio",
+              "sio:SIO_000300" => ratio_max,
             },
             "observedPerExpectedMaxPosition" => ratio_max_position,
           }
@@ -523,70 +524,70 @@ module Bio
 
       def min_length
         {
-          "minSequenceLength" => {
-            "@type" => "SequenceReadLength",
-            "hasUnit" => "obo:UO_0000244",
-            "rdf:value" => @fastqc_object[:min_length],
+          "sio:SIO_000216" => {
+            "@type" => "minimumSequenceLength",
+            "sio:SIO_000221" => "obo:UO_0000244",
+            "sio:SIO_000300" => @fastqc_object[:min_length],
           }
         }
       end
 
       def max_length
         {
-          "maxSequenceLength" => {
-            "@type" => "SequenceReadLength",
-            "hasUnit" => "obo:UO_0000244",
-            "rdf:value" => @fastqc_object[:max_length],
+          "sio:SIO_000216" => {
+            "@type" => "maxSequenceLength",
+            "sio:SIO_000221" => "obo:UO_0000244",
+            "sio:SIO_000300" => @fastqc_object[:max_length],
           }
         }
       end
 
       def mean_sequence_length
         {
-          "meanSequenceLength" => {
-            "@type" => "SequenceReadLength",
-            "hasUnit" => "obo:UO_0000244",
-            "rdf:value" => @fastqc_object[:mean_sequence_length],
+          "sio:SIO_000216" => {
+            "@type" => "meanSequenceLength",
+            "sio:SIO_000221" => "obo:UO_0000244",
+            "sio:SIO_000300" => @fastqc_object[:mean_sequence_length],
           }
         }
       end
 
       def median_sequence_length
         {
-            "medianSequenceLength" => {
-            "@type" => "SequenceReadLength",
-            "hasUnit" => "obo:UO_0000244",
-            "rdf:value" => @fastqc_object[:median_sequence_length],
+            "sio:SIO_000216" => {
+            "@type" => "medianSequenceLength",
+            "sio:SIO_000221" => "obo:UO_0000244",
+            "sio:SIO_000300" => @fastqc_object[:median_sequence_length],
           }
         }
       end
 
       def overall_mean_quality_score
         {
-          "overallMeanBaseCallQuality" => {
-            "@type" => "PhredQualityScore",
-            "hasUnit" => "obo:UO_0000189",
-            "rdf:value" => @fastqc_object[:overall_mean_quality_score],
+          "sio:SIO_000216" => {
+            "@type" => "meanBaseCallQuality",
+            "sio:SIO_000221" => "obo:UO_0000189",
+            "sio:SIO_000300" => @fastqc_object[:overall_mean_quality_score],
           }
         }
       end
 
       def overall_median_quality_score
         {
-          "overallMedianBaseCallQuality" => {
-            "@type" => "PhredQualityScore",
-            "hasUnit" => "obo:UO_0000189",
-            "rdf:value" => @fastqc_object[:overall_median_quality_score],
+          "sio:SIO_000216" => {
+            "@type" => "medianBaseCallQuality",
+            "sio:SIO_000221" => "obo:UO_0000189",
+            "sio:SIO_000300" => @fastqc_object[:overall_median_quality_score],
           }
         }
       end
 
       def overall_n_content
         {
-          "overallNContent" => {
-            "@type" => "BaseRatio",
-            "hasUnit" => "obo:UO_0000187",
-            "rdf:value" => @fastqc_object[:overall_n_content],
+          "sio:SIO_000216" => {
+            "@type" => "nContent",
+            "sio:SIO_000221" => "obo:UO_0000187",
+            "sio:SIO_000300" => @fastqc_object[:overall_n_content],
           }
         }
       end
@@ -682,6 +683,16 @@ module Bio
           "SequenceReadRatio",
           "SequenceReadLength",
           "SequenceDuplicationLevel",
+          "nContent",
+          "percentGC",
+          "medianBaseCallQuality",
+          "meanBaseCallQuality",
+          "totalSequences",
+          "filteredSequences",
+          "minimumSequenceLength",
+          "maxSequenceLength",
+          "meanSequenceLength",
+          "medianSequenceLength",
         ]
       end
 
@@ -715,7 +726,6 @@ module Bio
           "sequenceReadLength",
           "sequenceReadPercentage",
           "sequenceReadRelativeCount",
-          "hasUnit",
           "overallMeanBaseCallQuality",
           "overallMedianBaseCallQuality",
           "overallNContent",
