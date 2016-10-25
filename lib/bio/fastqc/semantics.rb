@@ -26,7 +26,7 @@ module Bio
 
       def turtle_prefixes
         {
-          "uo" => "http://purl.obolibrary.org/obo/",
+          "obo" => "http://purl.obolibrary.org/obo/",
           "rdf" => "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
           "rdfs" => "http://www.w3.org/2000/01/rdf-schema#",
           "dcterms" => "http://purl.org/dc/terms/",
@@ -159,7 +159,7 @@ module Bio
         {
           "totalSequences" => {
             "@type" => "SequenceReadAmount",
-            "hasUnit" => "uo:UO_0000244",
+            "hasUnit" => "obo:UO_0000244",
             "rdf:value" => @fastqc_object[:total_sequences],
           }
         }
@@ -169,7 +169,7 @@ module Bio
         {
           "filteredSequences" => {
             "@type" => "SequenceReadAmount",
-            "hasUnit" => "uo:UO_0000244",
+            "hasUnit" => "obo:UO_0000244",
             "rdf:value" => @fastqc_object[:filtered_sequences],
           }
         }
@@ -179,7 +179,7 @@ module Bio
         {
           "sequenceLength" => {
             "@type" => "SequenceReadLength",
-            "hasUnit" => "uo:UO_0000244",
+            "hasUnit" => "obo:UO_0000244",
             "rdf:value" => @fastqc_object[:sequence_length],
           }
         }
@@ -189,7 +189,7 @@ module Bio
         {
           "percentGC" => {
             "@type" => "BaseRatio",
-            "hasUnit" => "uo:UO_0000187",
+            "hasUnit" => "obo:UO_0000187",
             "rdf:value" => @fastqc_object[:percent_gc],
           }
         }
@@ -221,32 +221,32 @@ module Bio
             "basePosition" => base,
             "meanBaseCallQuality" => {
               "@type" => "PhredQualityScore",
-              "hasUnit" => "uo:UO_0000189",
+              "hasUnit" => "obo:UO_0000189",
               "rdf:value" => mean,
             },
             "medianBaseCallQuality" => {
               "@type" => "PhredQualityScore",
-              "hasUnit" => "uo:UO_0000189",
+              "hasUnit" => "obo:UO_0000189",
               "rdf:value" => median,
             },
             "baseCallQualityLowerQuartile" => {
               "@type" => "PhredQualityScore",
-              "hasUnit" => "uo:UO_0000189",
+              "hasUnit" => "obo:UO_0000189",
               "rdf:value" => lower_quartile,
             },
             "baseCallQualityUpperQuartile" => {
               "@type" => "PhredQualityScore",
-              "hasUnit" => "uo:UO_0000189",
+              "hasUnit" => "obo:UO_0000189",
               "rdf:value" => upper_quartile,
             },
             "baseCallQuality10thPercentile" => {
               "@type" => "PhredQualityScore",
-              "hasUnit" => "uo:UO_0000189",
+              "hasUnit" => "obo:UO_0000189",
               "rdf:value" => tenth_percentile,
             },
             "baseCallQuality90thPercentile" => {
               "@type" => "PhredQualityScore",
-              "hasUnit" => "uo:UO_0000189",
+              "hasUnit" => "obo:UO_0000189",
               "rdf:value" => ninetieth_percentile,
             },
           }
@@ -273,12 +273,12 @@ module Bio
             "rowIndex" => i,
             "baseCallQuality" => {
               "@type" => "PhredQualityScore",
-              "hasUnit" => "uo:UO_0000189",
+              "hasUnit" => "obo:UO_0000189",
               "rdf:value" => quality,
             },
             "sequenceReadCount" => {
               "@type" => "SequenceReadAmount",
-              "hasUnit" => "uo:UO_0000244",
+              "hasUnit" => "obo:UO_0000244",
               "rdf:value" => count,
             },
           }
@@ -308,22 +308,22 @@ module Bio
             "basePosition" => base,
             "percentGuanine" => {
               "@type" => "BaseRatio",
-              "hasUnit" => "uo:UO_0000187",
+              "hasUnit" => "obo:UO_0000187",
               "rdf:value" => guanine,
             },
             "percentAdenine" => {
               "@type" => "BaseRatio",
-              "hasUnit" => "uo:UO_0000187",
+              "hasUnit" => "obo:UO_0000187",
               "rdf:value" => adenine,
             },
             "percentThymine" => {
               "@type" => "BaseRatio",
-              "hasUnit" => "uo:UO_0000187",
+              "hasUnit" => "obo:UO_0000187",
               "rdf:value" => thymine,
             },
             "percentCytosine" => {
               "@type" => "BaseRatio",
-              "hasUnit" => "uo:UO_0000187",
+              "hasUnit" => "obo:UO_0000187",
               "rdf:value" => chytosine,
             },
           }
@@ -346,12 +346,12 @@ module Bio
             "rowIndex" => i,
             "percentGC" => {
               "@type" => "BaseRatio",
-              "hasunit" => "uo:UO_0000187",
+              "hasunit" => "obo:UO_0000187",
               "rdf:value" => gc_content,
             },
             "sequenceReadCount" => {
               "@type" => "SequenceReadAmount",
-              "hasUnit" => "uo:UO_0000244",
+              "hasUnit" => "obo:UO_0000244",
               "rdf:value" => count,
             },
           }
@@ -378,7 +378,7 @@ module Bio
             "basePosition" => base,
             "nCount" => {
               "@type" => "BaseRatio",
-              "hasUnit" => "uo:UO_0000187",
+              "hasUnit" => "obo:UO_0000187",
               "rdf:value" => n_count,
             },
           }
@@ -402,12 +402,12 @@ module Bio
 
             "sequenceReadLength" => {
               "@type" => "SequenceReadLength",
-              "hasUnit" => "uo:UO_0000244",
+              "hasUnit" => "obo:UO_0000244",
               "rdf:value" => length,
             },
             "sequenceReadCount" => {
               "@type" => "SequenceReadAmount",
-              "hasUnit" => "uo:UO_0000244",
+              "hasUnit" => "obo:UO_0000244",
               "rdf:value" => count,
             },
           }
@@ -435,12 +435,12 @@ module Bio
 
             "sequenceDuplicationLevel" => {
               "@type" => "SequenceDuplicationLevel",
-              "hasUnit" => "uo:UO_0000189",
+              "hasUnit" => "obo:UO_0000189",
               "rdf:value" => duplication_level,
             },
             "sequenceReadRelativeCount" => {
               "@type" => "SequenceReadAmount",
-              "hasUnit" => "uo:UO_0000244",
+              "hasUnit" => "obo:UO_0000244",
               "rdf:value" => relative_count,
             },
           }
@@ -466,12 +466,12 @@ module Bio
             "overrepresentedSequence" => sequence,
             "sequenceReadCount" => {
               "@type" => "SequenceReadAmount",
-              "hasUnit" => "uo:UO_0000244",
+              "hasUnit" => "obo:UO_0000244",
               "rdf:value" => count,
             },
             "sequenceReadPercentage" => {
               "@type" => "SequenceReadRatio",
-              "hasUnit" => "uo:UO_0000187",
+              "hasUnit" => "obo:UO_0000187",
               "rdf:value" => percentage,
             },
             "possibleSourceOfSequence" => possible_source,
@@ -503,17 +503,17 @@ module Bio
             "kmerSequence" => sequence,
             "sequenceReadCount" => {
               "@type" => "SequenceReadAmount",
-              "hasUnit" => "uo:UO_0000244",
+              "hasUnit" => "obo:UO_0000244",
               "rdf:value" => count,
             },
             "observedPerExpectedOverall" => {
               "@type" => "SequenceReadAmount",
-              "hasUnit" => "uo:Ratio",
+              "hasUnit" => "obo:Ratio",
               "rdf:value" => ratio_overall,
             },
             "observedPerExpectedMax" => {
               "@type" => "SequenceReadAmount",
-              "hasUnit" => "uo:Ratio",
+              "hasUnit" => "obo:Ratio",
               "rdf:value" => ratio_max,
             },
             "observedPerExpectedMaxPosition" => ratio_max_position,
@@ -525,7 +525,7 @@ module Bio
         {
           "minSequenceLength" => {
             "@type" => "SequenceReadLength",
-            "hasUnit" => "uo:UO_0000244",
+            "hasUnit" => "obo:UO_0000244",
             "rdf:value" => @fastqc_object[:min_length],
           }
         }
@@ -535,7 +535,7 @@ module Bio
         {
           "maxSequenceLength" => {
             "@type" => "SequenceReadLength",
-            "hasUnit" => "uo:UO_0000244",
+            "hasUnit" => "obo:UO_0000244",
             "rdf:value" => @fastqc_object[:max_length],
           }
         }
@@ -545,7 +545,7 @@ module Bio
         {
           "meanSequenceLength" => {
             "@type" => "SequenceReadLength",
-            "hasUnit" => "uo:UO_0000244",
+            "hasUnit" => "obo:UO_0000244",
             "rdf:value" => @fastqc_object[:mean_sequence_length],
           }
         }
@@ -555,7 +555,7 @@ module Bio
         {
             "medianSequenceLength" => {
             "@type" => "SequenceReadLength",
-            "hasUnit" => "uo:UO_0000244",
+            "hasUnit" => "obo:UO_0000244",
             "rdf:value" => @fastqc_object[:median_sequence_length],
           }
         }
@@ -565,7 +565,7 @@ module Bio
         {
           "overallMeanBaseCallQuality" => {
             "@type" => "PhredQualityScore",
-            "hasUnit" => "uo:UO_0000189",
+            "hasUnit" => "obo:UO_0000189",
             "rdf:value" => @fastqc_object[:overall_mean_quality_score],
           }
         }
@@ -575,7 +575,7 @@ module Bio
         {
           "overallMedianBaseCallQuality" => {
             "@type" => "PhredQualityScore",
-            "hasUnit" => "uo:UO_0000189",
+            "hasUnit" => "obo:UO_0000189",
             "rdf:value" => @fastqc_object[:overall_median_quality_score],
           }
         }
@@ -585,7 +585,7 @@ module Bio
         {
           "overallNContent" => {
             "@type" => "BaseRatio",
-            "hasUnit" => "uo:UO_0000187",
+            "hasUnit" => "obo:UO_0000187",
             "rdf:value" => @fastqc_object[:overall_n_content],
           }
         }
