@@ -56,7 +56,7 @@ module Bio
       end
 
       def identifier_literal
-        @id ? @id : "QNT" + @fastqc_object[:filename].split(".")[0]
+        @id ? @id : "QNT_" + @fastqc_object[:filename].split(".")[0]
       end
 
       def identifier_uri
