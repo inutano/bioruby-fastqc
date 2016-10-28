@@ -35,11 +35,12 @@ module Bio
           "sos" => "http://purl.jp/bio/01/quanto/ontology/sos#",
           "quanto" => "http://purl.jp/bio/01/quanto/resource/",
           "sio" => "http://semanticscience.org/resource/",
+          "xsd" => "http://www.w3.org/2001/XMLSchema#",
         }
       end
 
       def json_ld_object
-        object = [object_core, static_value_modules].flatten.inject(&:merge)
+        object = [object_core, static_value_modules, object_modules].flatten.inject(&:merge)
         if !@tiny
           object["hasMatrix"] = matrix_modules
         end
@@ -92,19 +93,25 @@ module Bio
           filename,
           file_type,
           encoding,
-          total_sequences,
-          filtered_sequences,
-          #sequence_length,
-          percent_gc,
-          total_duplicate_percentage,
-          min_length,
-          max_length,
-          overall_mean_quality_score,
-          overall_median_quality_score,
-          overall_n_content,
-          mean_sequence_length,
-          median_sequence_length,
         ]
+      end
+
+      def object_modules
+        {
+          "sio:SIO_000216" => [
+            total_sequences,
+            filtered_sequences,
+            percent_gc,
+            #total_duplicate_percentage,
+            min_length,
+            max_length,
+            overall_mean_quality_score,
+            overall_median_quality_score,
+            overall_n_content,
+            mean_sequence_length,
+            median_sequence_length,
+          ]
+        }
       end
 
       def matrix_modules
@@ -158,40 +165,44 @@ module Bio
 
       def total_sequences
         {
-          "sio:SIO_000216" => {
-            "@type" => "totalSequences",
-            "sio:SIO_000221" => "obo:UO_0000244",
-            "sio:SIO_000300" => @fastqc_object[:total_sequences],
-          }
+          "@type" => "totalSequences",
+          "sio:SIO_000221" => "obo:UO_0000244",
+          "sio:SIO_000300" => {
+            "@value" => @fastqc_object[:total_sequences],
+            "@type" => "xsd:integer",
+          },
         }
       end
 
       def filtered_sequences
         {
-          "sio:SIO_000216" => {
-            "@type" => "filteredSequences",
-            "sio:SIO_000221" => "obo:UO_0000244",
-            "sio:SIO_000300" => @fastqc_object[:filtered_sequences],
+          "@type" => "filteredSequences",
+          "sio:SIO_000221" => "obo:UO_0000244",
+          "sio:SIO_000300" => {
+            "@value" => @fastqc_object[:filtered_sequences],
+            "@type" => "xsd:integer",
           }
         }
       end
 
       def sequence_length
         {
-          "sio:SIO_000216" => {
-            "@type" => "SequenceReadLength",
-            "sio:SIO_000221" => "obo:UO_0000244",
-            "sio:SIO_000300" => @fastqc_object[:sequence_length],
+          "@type" => "SequenceReadLength",
+          "sio:SIO_000221" => "obo:UO_0000244",
+          "sio:SIO_000300" => {
+            "@value" => @fastqc_object[:sequence_length],
+            "@type" => "xsd:string",
           }
         }
       end
 
       def percent_gc
         {
-          "sio:SIO_000216" => {
-            "@type" => "percentGC",
-            "sio:SIO_000221" => "obo:UO_0000187",
-            "sio:SIO_000300" => @fastqc_object[:percent_gc],
+          "@type" => "percentGC",
+          "sio:SIO_000221" => "obo:UO_0000187",
+          "sio:SIO_000300" => {
+            "@value" => @fastqc_object[:percent_gc],
+            "@type" => "xsd:decimal",
           }
         }
       end
@@ -524,71 +535,78 @@ module Bio
 
       def min_length
         {
-          "sio:SIO_000216" => {
-            "@type" => "minimumSequenceLength",
-            "sio:SIO_000221" => "obo:UO_0000244",
-            "sio:SIO_000300" => @fastqc_object[:min_length],
-          }
+          "@type" => "minimumSequenceLength",
+          "sio:SIO_000221" => "obo:UO_0000244",
+          "sio:SIO_000300" => {
+            "@value" => @fastqc_object[:min_length],
+            "@type" => "xsd:integer",
+          },
         }
       end
 
       def max_length
         {
-          "sio:SIO_000216" => {
-            "@type" => "maxSequenceLength",
-            "sio:SIO_000221" => "obo:UO_0000244",
-            "sio:SIO_000300" => @fastqc_object[:max_length],
-          }
+          "@type" => "maxSequenceLength",
+          "sio:SIO_000221" => "obo:UO_0000244",
+          "sio:SIO_000300" => {
+            "@value" => @fastqc_object[:max_length],
+            "@type" => "xsd:integer",
+          },
         }
       end
 
       def mean_sequence_length
         {
-          "sio:SIO_000216" => {
-            "@type" => "meanSequenceLength",
-            "sio:SIO_000221" => "obo:UO_0000244",
-            "sio:SIO_000300" => @fastqc_object[:mean_sequence_length],
-          }
+          "@type" => "meanSequenceLength",
+          "sio:SIO_000221" => "obo:UO_0000244",
+          "sio:SIO_000300" => {
+            "@value" => @fastqc_object[:mean_sequence_length],
+            "@type" => "xsd:decimal",
+          },
         }
       end
 
       def median_sequence_length
         {
-            "sio:SIO_000216" => {
-            "@type" => "medianSequenceLength",
-            "sio:SIO_000221" => "obo:UO_0000244",
-            "sio:SIO_000300" => @fastqc_object[:median_sequence_length],
-          }
+          "@type" => "medianSequenceLength",
+          "sio:SIO_000221" => "obo:UO_0000244",
+          "sio:SIO_000300" => {
+            "@value" => @fastqc_object[:median_sequence_length],
+            "@type" => "xsd:decimal",
+          },
         }
       end
 
       def overall_mean_quality_score
         {
-          "sio:SIO_000216" => {
-            "@type" => "meanBaseCallQuality",
-            "sio:SIO_000221" => "obo:UO_0000189",
-            "sio:SIO_000300" => @fastqc_object[:overall_mean_quality_score],
-          }
+          "@type" => "meanBaseCallQuality",
+          "sio:SIO_000221" => "obo:UO_0000189",
+          "sio:SIO_000300" => {
+            "@value" => @fastqc_object[:overall_mean_quality_score],
+            "@type" => "xsd:decimal",
+          },
         }
       end
 
       def overall_median_quality_score
         {
-          "sio:SIO_000216" => {
-            "@type" => "medianBaseCallQuality",
-            "sio:SIO_000221" => "obo:UO_0000189",
-            "sio:SIO_000300" => @fastqc_object[:overall_median_quality_score],
-          }
+          "@type" => "medianBaseCallQuality",
+          "sio:SIO_000221" => "obo:UO_0000189",
+          "sio:SIO_000300" => {
+            "@value" => @fastqc_object[:overall_median_quality_score],
+            "@type" => "xsd:decimal",
+          },
         }
       end
 
       def overall_n_content
         {
-          "sio:SIO_000216" => {
-            "@type" => "nContent",
-            "sio:SIO_000221" => "obo:UO_0000187",
-            "sio:SIO_000300" => @fastqc_object[:overall_n_content],
-          }
+          "@type" => "nContent",
+          "sio:SIO_000221" => "obo:UO_0000187",
+          "sio:SIO_000300" => {
+            "@value" => @fastqc_object[:overall_n_content],
+            "@type" => "xsd:decimal",
+          },
         }
       end
 
