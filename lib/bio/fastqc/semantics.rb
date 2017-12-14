@@ -32,8 +32,8 @@ module Bio
           "dcterms" => "http://purl.org/dc/terms/",
           "pav" => "http://purl.org/pav/",
           "foaf" => "http://xmlns.com/foaf/0.1/",
-          "sos" => "http://purl.jp/bio/01/quanto/ontology/sos#",
-          "quanto" => "http://purl.jp/bio/01/quanto/resource/",
+          "sos" => "http://purl.jp/bio/10/quanto/ontology/sos#",
+          "quanto" => "http://purl.jp/bio/10/quanto/resource/",
           "sio" => "http://semanticscience.org/resource/",
           "xsd" => "http://www.w3.org/2001/XMLSchema#",
         }
