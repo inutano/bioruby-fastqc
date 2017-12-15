@@ -3,8 +3,9 @@
 module Bio
   module FastQC
     class Converter
-      def initialize(fastqc_object, id: nil)
+      def initialize(fastqc_object, id: nil, runid: nil)
         @id = id
+        @runid = runid
         @fastqc_object = fastqc_object
       end
 
@@ -31,12 +32,12 @@ module Bio
       end
 
       def to_jsonld
-        json_ld_object = Semantics.new(@fastqc_object, id: @id).json_ld_object
+        json_ld_object = Semantics.new(@fastqc_object, id: @id, runid: @runid).json_ld_object
         JSON.dump(json_ld_object)
       end
 
       def to_turtle
-        Semantics.new(@fastqc_object, id: @id).turtle
+        Semantics.new(@fastqc_object, id: @id, runid: @runid).turtle
       end
 
       def to_ttl
