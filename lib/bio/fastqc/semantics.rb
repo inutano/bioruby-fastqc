@@ -6,8 +6,9 @@ require 'rdf/turtle'
 module Bio
   module FastQC
     class Semantics
-      def initialize(fastqc_object, id: nil, tiny: true)
+      def initialize(fastqc_object, id: nil, runid: nil, tiny: true)
         @id = id
+        @runid = runid
         @tiny = tiny
         @fastqc_object = fastqc_object
       end
@@ -52,7 +53,7 @@ module Bio
       end
 
       def sra_identifier
-        @fastqc_object[:filename].split(".")[0].split("_")[0]
+        @runid ? @runid : @fastqc_object[:filename].split(".")[0].split("_")[0]
       end
 
       def identifier_literal
