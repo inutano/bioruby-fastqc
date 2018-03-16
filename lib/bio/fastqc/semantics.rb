@@ -71,7 +71,10 @@ module Bio
           "@type" => "SequenceStatisticsReport",
           "dcterms:identifier" => identifier_literal,
           "dcterms:contributor" => ["Tazro Ohta", "Shuichi Kawashima"],
-          "dcterms:created" => Time.now.strftime("%Y-%m-%d"),
+          "dcterms:created" => {
+            "@value" => Time.now.strftime("%Y-%m-%d"),
+            "@type" => "xsd:date"
+          },
           "dcterms:license" => {
             "@id" => "http://creativecommons.org/licenses/by-sa/4.0/",
           },
