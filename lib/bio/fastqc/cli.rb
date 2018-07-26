@@ -8,7 +8,7 @@ module Bio
     class CLI < Thor
       desc "parse [--format format] [--outdir output directory] [filepath, ..]", "parse fastqc data in directory or zipfile. output format: json, json-ld, turtle, or tsv"
       option :format, :default => "json"
-      option :output, :default => nil
+      option :outdir, :default => nil
       def parse(*files)
         files.each do |file|
           data = Data.read(file)
