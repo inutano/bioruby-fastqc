@@ -13,9 +13,9 @@ module Bio
         case format
         when "json"
           to_json
-        when "json-ld"
+        when "json-ld", "jsonld"
           to_jsonld
-        when "turtle"
+        when "turtle", "ttl"
           to_turtle
         when "tsv"
           to_tsv
